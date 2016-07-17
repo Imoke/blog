@@ -6,7 +6,6 @@ package com.lw.blog.dao.mongo.user;
 
 import com.lw.blog.model.user.User;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 
@@ -67,5 +66,4 @@ public interface UserDao {
 	 * @return
 	 */
 	User findUserByName(String username);
-	
 }

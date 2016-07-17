@@ -37,7 +37,7 @@ public class Pagination {
         this.totalNumber = totalNumber;
         this.totalPage = totalNumber / pageSize + 1;
         this.skip = (currentPage - 1) * pageSize;
-        this.sort = new Sort(new Sort.Order(Direction.ASC, "_id"));
+        this.sort = new Sort(new Sort.Order(Direction.DESC, "create_at"));
     }
 
     public Integer getCurrentPage() {
