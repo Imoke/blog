@@ -12,4 +12,6 @@ import java.util.List;
 public interface BlogService {
 
 	List<Post> getAllPostsByPage(int page);
+	
+	Post getBlogById(String id);
 }

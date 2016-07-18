@@ -22,7 +22,6 @@ public class UserController {
 	@Resource
 
 	private UserServiceImpl userService;
-
 	@RequestMapping("/showUser")
 	public String toIndex(HttpServletRequest request,Model model){
 		String userName= request.getParameter("username");

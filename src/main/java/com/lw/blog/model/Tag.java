@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 /**
  * Created by LWang on 2016/7/17.
  */
@@ -18,14 +20,20 @@ public class Tag {
 	private long _creat_at;
 	@Field("update_at")
 	private long _update_at;
+	@Field("name_eng")
+	private String _name_eng;
+	@Field("blog_id")
+	private List<String> _blog_id;
 
 	@Override
 	public String toString() {
 		return "Tag{" +
-				"_creat_at='" + _creat_at + '\'' +
+				"_blog_id=" + _blog_id +
 				", _id='" + _id + '\'' +
 				", _name='" + _name + '\'' +
-				", _update_at='" + _update_at + '\'' +
+				", _creat_at=" + _creat_at +
+				", _update_at=" + _update_at +
+				", _name_eng='" + _name_eng + '\'' +
 				'}';
 	}
 
@@ -59,5 +67,21 @@ public class Tag {
 
 	public void set_update_at(long _update_at) {
 		this._update_at = _update_at;
+	}
+
+	public List<String> get_blog_id() {
+		return _blog_id;
+	}
+
+	public void set_blog_id(List<String> _blog_id) {
+		this._blog_id = _blog_id;
+	}
+
+	public String get_name_eng() {
+		return _name_eng;
+	}
+
+	public void set_name_eng(String _name_eng) {
+		this._name_eng = _name_eng;
 	}
 }

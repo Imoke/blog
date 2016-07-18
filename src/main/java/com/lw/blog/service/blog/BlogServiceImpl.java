@@ -21,4 +21,8 @@ public class BlogServiceImpl implements BlogService{
 		return postDao.getAllPostsByPage(pagination);
 
 	}
+
+	public Post getBlogById(String id) {
+		return postDao.findOne(id);
+	}
 }

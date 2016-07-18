@@ -1,5 +1,6 @@
 package com.lw.blog.dao.mongo.tag;
 
+import com.lw.blog.model.Tag;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -8,4 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface TagDao {
+	Tag getTagByClassNume(String name);
 }

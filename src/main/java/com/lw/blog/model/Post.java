@@ -20,12 +20,12 @@ public class Post {
 	private String _describe;
 	@Field("content")
 	private String _content;
-	@Field("ctrate_at")
-	private long _ctrate_at;
+	@Field("create_at")
+	private long _create_at;
 	@Field("update_at")
 	private long _update_at;
-	@Field("tags_name")
-	private List<String> _tags_name;
+	@Field("tags")
+	private List<Tag> _tags;
 
 	@Override
 	public String toString() {
@@ -34,9 +34,9 @@ public class Post {
 				", _id='" + _id + '\'' +
 				", _title='" + _title + '\'' +
 				", _describe='" + _describe + '\'' +
-				", _ctrate_at=" + _ctrate_at +
+				", _create_at=" + _create_at +
 				", _update_at=" + _update_at +
-				", _tags=" + _tags_name +
+				", _tags=" + _tags +
 				'}';
 	}
 
@@ -48,12 +48,12 @@ public class Post {
 		this._content = _content;
 	}
 
-	public long get_ctrate_at() {
-		return _ctrate_at;
+	public long get_create_at() {
+		return _create_at;
 	}
 
-	public void set_ctrate_at(long _ctrate_at) {
-		this._ctrate_at = _ctrate_at;
+	public void set_create_at(long _create_at) {
+		this._create_at = _create_at;
 	}
 
 	public String get_describe() {
@@ -72,12 +72,12 @@ public class Post {
 		this._id = _id;
 	}
 
-	public List<String> get_tags() {
-		return _tags_name;
+	public List<Tag> get_tags() {
+		return _tags;
 	}
 
-	public void set_tags(List<String> _tags_name) {
-		this._tags_name = _tags_name;
+	public void set_tags(List<Tag> _tags) {
+		this._tags = _tags;
 	}
 
 	public String get_title() {
