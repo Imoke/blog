@@ -14,4 +14,6 @@ import java.util.List;
 public interface PostDao {
     long getAllPostsNumber();
 	List<Post> getAllPostsByPage(Pagination pagination);
+	
+	List<Post> findAllPosts();
 }

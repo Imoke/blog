@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 
-	public Tag getTagByClassNume(String name) {
+	public Tag getTagByClassName(String name) {
 		Query query = new Query();
 		query.addCriteria(new Criteria("name_eng").is(name));
 		return this.find(query).get(0);

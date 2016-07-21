@@ -4,6 +4,7 @@ import com.lw.blog.dao.mongo.common.util.Pagination;
 import com.lw.blog.dao.mongo.post.PostDaoImpl;
 import com.lw.blog.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,4 +26,14 @@ public class BlogServiceImpl implements BlogService{
 	public Post getBlogById(String id) {
 		return postDao.findOne(id);
 	}
+
+	public List<Post> getAllPosts() {
+		return postDao.findAllPosts();
+	}
+
+	public List<Post> getBlogByYear(int year) {
+		List<Post> postList = postDao.findPostByYear(year);
+		return postList;
+	}
+
 }

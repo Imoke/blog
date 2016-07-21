@@ -4,9 +4,13 @@ import com.lw.blog.dao.mongo.common.BaseDao;
 import com.lw.blog.dao.mongo.common.util.Pagination;
 import com.lw.blog.model.Post;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +20,7 @@ import java.util.List;
 @Repository
 public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 
+	private SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public long getAllPostsNumber() {
 		return this.findCount(new Query());
@@ -24,6 +29,30 @@ public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 	public List<Post> getAllPostsByPage(Pagination pagination) {
 		Query query = new Query();
 		query.skip(pagination.getSkip()).limit(pagination.getPageSize());
+		return this.find(query);
+	}
+
+	public List<Post> findAllPosts() {
+		Query query = new Query();
+		Sort sort = new Sort(Sort.Direction.DESC,"create_at");
+		query.with(sort);
+		return this.find(query);
+	}
+
+	public List<Post> findPostByYear(int year) {
+		String largeTime = (1+year)+"-01-01 00:00:00";
+		String smallTime = year+"-01-01 00:00:00";
+		long t1=0,t2=0;
+		try {
+			t1 = format.parse(largeTime).getTime();
+			t2 = format.parse(smallTime).getTime();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Query query = new Query();
+		query.addCriteria(new Criteria("create_at").lt(t1).gte(t2));
+		Sort sort = new Sort(Sort.Direction.DESC,"create_at");
+		query.with(sort);
 		return this.find(query);
 	}
 }

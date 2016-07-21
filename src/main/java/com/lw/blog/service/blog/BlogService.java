@@ -14,4 +14,9 @@ public interface BlogService {
 	List<Post> getAllPostsByPage(int page);
 	
 	Post getBlogById(String id);
+
+	List<Post> getAllPosts();
+
+
+	List<Post> getBlogByYear(int year);
 }

@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface TagDao {
-	Tag getTagByClassNume(String name);
+	Tag getTagByClassName(String name);
 }

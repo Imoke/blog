@@ -3,6 +3,8 @@ package com.lw.blog.service.tag;
 import com.lw.blog.model.Tag;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by LWang on 2016/7/18.
  */
@@ -10,5 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TagService {
 	
-	Tag getTagByClassNume(String name);
+	Tag getTagByClassName(String name);
+
+	List<Tag> getAllTags();
 }
