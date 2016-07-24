@@ -24,6 +24,8 @@ public class Tag {
 	private String _name_eng;
 	@Field("blog_id")
 	private List<String> _blog_id;
+	@Field("is_exist")
+	private boolean _is_exist;
 
 	@Override
 	public String toString() {
@@ -34,6 +36,7 @@ public class Tag {
 				", _creat_at=" + _creat_at +
 				", _update_at=" + _update_at +
 				", _name_eng='" + _name_eng + '\'' +
+				", _is_exist=" + _is_exist +
 				'}';
 	}
 
@@ -83,5 +86,13 @@ public class Tag {
 
 	public void set_name_eng(String _name_eng) {
 		this._name_eng = _name_eng;
+	}
+
+	public boolean is_is_exist() {
+		return _is_exist;
+	}
+
+	public void set_is_exist(boolean _is_exist) {
+		this._is_exist = _is_exist;
 	}
 }

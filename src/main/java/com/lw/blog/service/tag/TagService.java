@@ -15,4 +15,14 @@ public interface TagService {
 	Tag getTagByClassName(String name);
 
 	List<Tag> getAllTags();
+	
+	boolean isExistTagName(String tagName);
+	
+	boolean isExistTagEngName(String tagEngName);
+	
+	boolean isInsertTagInfo(String tagName, String tagEngName);
+	
+	boolean isEditTagInfo(String tagId,String tagName, String tagEngName);
+	
+	boolean isDelTagInfo(String tagId);
 }

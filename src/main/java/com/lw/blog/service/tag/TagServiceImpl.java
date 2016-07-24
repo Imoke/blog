@@ -21,6 +21,65 @@ public class TagServiceImpl implements TagService {
 	}
 
 	public List<Tag> getAllTags() {
-		return tagDao.find(new Query());
+		return tagDao.findAllExistTags();
+	}
+
+	public boolean isExistTagName(String tagName) {
+		Tag tag = tagDao.findTagByName(tagName);
+		if(tag!=null&&!tag.equals("")){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public boolean isExistTagEngName(String tagEngName) {
+		Tag tag = tagDao.findTagByEngName(tagEngName);
+		if(tag!=null&&!tag.equals("")){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	public boolean isInsertTagInfo(String tagName, String tagEngName) {
+		Tag tag = new Tag();
+		tag.set_name(tagName);
+		tag.set_name_eng(tagEngName);
+		tag.set_creat_at(System.currentTimeMillis());
+		tag.set_update_at(System.currentTimeMillis());
+		tag.set_is_exist(true);
+		try {
+			tagDao.insert(tag);
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+	public boolean isEditTagInfo(String tagId,String tagName, String tagEngName) {
+		Tag tag = new Tag();
+		tag.set_name(tagName);
+		tag.set_name_eng(tagEngName);
+		tag.set_update_at(System.currentTimeMillis());
+		try {
+			tagDao.updateTagInfo(tagId,tag);
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean isDelTagInfo(String tagId) {
+		try {
+			tagDao.delTagInfo(tagId);
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
