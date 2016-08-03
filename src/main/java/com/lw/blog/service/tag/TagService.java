@@ -25,4 +25,8 @@ public interface TagService {
 	boolean isEditTagInfo(String tagId,String tagName, String tagEngName);
 	
 	boolean isDelTagInfo(String tagId);
+	
+	boolean isExistTags(String tagsName);
+	
+	void updateTagofBlogId(String blogName, String blogTag);
 }

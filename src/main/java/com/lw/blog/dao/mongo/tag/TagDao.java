@@ -22,4 +22,8 @@ public interface TagDao {
 	void delTagInfo(String tagId);
 	
 	List<Tag> findAllExistTags();
+	
+	boolean isExistTags(List<String> taglist);
+	
+	void updateTagofBlogId(String blogTag, String postId);
 }

@@ -2,21 +2,15 @@ package com.lw.blog.controller;
 
 import com.lw.blog.model.Post;
 import com.lw.blog.service.blog.BlogService;
-import com.lw.blog.service.blog.BlogServiceImpl;
 import com.lw.blog.service.tag.TagService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by LWang on 2016/7/17.
@@ -28,8 +22,9 @@ public class BlogController {
 	private BlogService blogService;
 	@Autowired
 	private TagService tagService;
-
 	private SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	private static final Logger logger = Logger.getLogger(BlogController.class);
 	/**
 	 * Get all posts and sort by time in page.
 	 * @return
@@ -103,6 +98,10 @@ public class BlogController {
 
 	}
 
+	/**
+	 * Get all blog by year
+	 * @return
+	 */
 	@RequestMapping("/all_blog")
 	@ResponseBody
 	public List<List<Post>> getPostByYear(){
@@ -128,4 +127,171 @@ public class BlogController {
 		return postPerYear;
 	}
 
+	/**
+	 * file upload and add blog
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/upload" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
+	@ResponseBody
+	public String upload(@RequestParam("add-blog") MultipartFile file,@RequestParam("add-blogName") String blogName ,
+						 @RequestParam("add-blogTag") String blogTag,@RequestParam("add-blogDes") String blogDes) throws IOException {
+		if (!file.isEmpty()) {
+			InputStream in = null;
+			OutputStream out = null;
+
+			try {
+				// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
+				String webRootPath = System.getProperty("ft.webapp");
+				String html = null;
+				//logger.info(webRootPath);
+				// String rootPath = System.getProperty("catalina.home");
+				File dir = new File(webRootPath + File.separator + "uploadFiles");
+				if (!dir.exists())
+					dir.mkdirs();
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				in = file.getInputStream();
+				out = new FileOutputStream(serverFile);
+				byte[] b = new byte[1024];
+				int len = 0;
+				while ((len = in.read(b)) > 0) {
+					html += new String(b,0,len,"UTF-8");
+					out.write(b, 0, len);
+				}
+				out.close();
+				in.close();
+				html = blogService.renderToHtml(html);
+				logger.info("Server File Location=" + serverFile.getAbsolutePath());
+				logger.info("blogName:　" + blogName);
+				logger.info("blogTag: " + blogTag);
+				logger.info("blog: "+html);
+				logger.info("blogDes: "+blogDes);
+
+				//insert form to database
+
+				blogService.insertBlog2database(blogName, blogTag, html, blogDes);
+				//update tags info
+				tagService.updateTagofBlogId(blogName,blogTag);
+				return "success";
+
+			} catch (Exception e) {
+
+				return "fail";
+			} finally {
+				if (out != null) {
+					out.close();
+					out = null;
+				}
+
+				if (in != null) {
+					in.close();
+					in = null;
+				}
+			}
+		} else {
+
+			return null;
+		}
+	}
+
+	/**
+	 * edit blog
+	 * @param file
+	 * @param blogName
+	 * @param blogTag
+	 * @param blogID
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/editBlog" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
+	@ResponseBody
+	public String editBlog(@RequestParam("edit-blog") MultipartFile file,@RequestParam("edit-blogID") String blogID,
+						   @RequestParam("edit-blogName") String blogName , @RequestParam("edit-blogTag") String blogTag) throws IOException {
+		if (!file.isEmpty()) {
+			InputStream in = null;
+			OutputStream out = null;
+
+			try {
+				// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
+				String webRootPath = System.getProperty("ft.webapp");
+				String html = null;
+				//logger.info(webRootPath);
+				// String rootPath = System.getProperty("catalina.home");
+				File dir = new File(webRootPath + File.separator + "uploadFiles");
+				if (!dir.exists())
+					dir.mkdirs();
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				in = file.getInputStream();
+				out = new FileOutputStream(serverFile);
+				byte[] b = new byte[1024];
+				int len = 0;
+				while ((len = in.read(b)) > 0) {
+					html += new String(b,0,len,"UTF-8");
+					out.write(b, 0, len);
+				}
+				out.close();
+				in.close();
+				html = blogService.renderToHtml(html);
+				logger.info("Server File Location=" + serverFile.getAbsolutePath());
+				logger.info("blogName:　" + blogName);
+				logger.info("blogTag: " + blogTag);
+				logger.info("blog: "+html);
+
+
+				//insert form to database
+
+				blogService.updateBlog(blogID, blogName, blogTag, html);
+
+				return "success";
+
+			} catch (Exception e) {
+
+				return "fail";
+			} finally {
+				if (out != null) {
+					out.close();
+					out = null;
+				}
+
+				if (in != null) {
+					in.close();
+					in = null;
+				}
+			}
+		} else {
+
+			return null;
+		}
+	}
+
+	@RequestMapping("/deleteBlog")
+	@ResponseBody
+	public Boolean deleteBlog(@RequestParam String blogId){
+		boolean isDel = false;
+		if(blogId!=null){
+			isDel = blogService.deleteBlog(blogId);
+		}
+		return isDel;
+	}
+
+	/**
+	 * check is input tags exist in tag table
+	 * @param blogTag include not only one tag,splited use #.
+	 * @return
+	 */
+	@RequestMapping("/checkTagisExist")
+	@ResponseBody
+	public Boolean isExistTags(@RequestParam String blogTag){
+		boolean exist ;
+		exist = tagService.isExistTags(blogTag);
+		if(exist){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 }
+
+

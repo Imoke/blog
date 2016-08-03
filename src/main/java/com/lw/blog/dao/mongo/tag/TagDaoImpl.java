@@ -2,6 +2,7 @@ package com.lw.blog.dao.mongo.tag;
 
 import com.lw.blog.dao.mongo.common.BaseDao;
 import com.lw.blog.model.Tag;
+import org.python.antlr.ast.Str;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -68,7 +69,47 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 
 	public List<Tag> findAllExistTags() {
 		Query query = new Query();
-		query.addCriteria(new Criteria("is_exist").is(true));
+		/*query.addCriteria(new Criteria("is_exist").is(true));*/
 		return this.find(query);
+	}
+
+	@Override
+	public boolean isExistTags(List<String> taglist) {
+		if(taglist.size()!=0){
+			for (String tag :taglist) {
+				Query query = new Query();
+				query.addCriteria(new Criteria().andOperator(Criteria.where("name").is(tag),
+						Criteria.where("is_exist").is(true)));
+				if(this.find(query).size()==0){
+					return false;
+				}
+			}
+			return true;
+
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public void updateTagofBlogId(String blogTag, String postId) {
+		Tag tag = this.findTagByName(blogTag);
+		if(tag.get_blog_id().size()==0){
+			List<String> tags = new ArrayList<>();
+			tags.add(postId);
+			Query query = new Query();
+			query.addCriteria(new Criteria("name").is(blogTag));
+			Update update = new Update();
+			update.set("blog_id",tags);
+			this.update(query,update);
+		}else {
+			List<String> tags = tag.get_blog_id();
+			tags.add(postId);
+			Query query = new Query();
+			query.addCriteria(new Criteria("name").is(blogTag));
+			Update update = new Update();
+			update.set("blog_id",tags);
+			this.update(query,update);
+		}
 	}
 }

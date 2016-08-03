@@ -26,19 +26,8 @@ public class Post {
 	private long _update_at;
 	@Field("tags")
 	private List<Tag> _tags;
-
-	@Override
-	public String toString() {
-		return "Post{" +
-				"_content='" + _content + '\'' +
-				", _id='" + _id + '\'' +
-				", _title='" + _title + '\'' +
-				", _describe='" + _describe + '\'' +
-				", _create_at=" + _create_at +
-				", _update_at=" + _update_at +
-				", _tags=" + _tags +
-				'}';
-	}
+	@Field("is_exist")
+	private boolean _is_exist;
 
 	public String get_content() {
 		return _content;
@@ -94,5 +83,27 @@ public class Post {
 
 	public void set_update_at(long _update_at) {
 		this._update_at = _update_at;
+	}
+
+	@Override
+	public String toString() {
+		return "Post{" +
+				"_content='" + _content + '\'' +
+				", _id='" + _id + '\'' +
+				", _title='" + _title + '\'' +
+				", _describe='" + _describe + '\'' +
+				", _create_at=" + _create_at +
+				", _update_at=" + _update_at +
+				", _tags=" + _tags +
+				", _is_exist=" + _is_exist +
+				'}';
+	}
+
+	public boolean is_is_exist() {
+		return _is_exist;
+	}
+
+	public void set_is_exist(boolean _is_exist) {
+		this._is_exist = _is_exist;
 	}
 }

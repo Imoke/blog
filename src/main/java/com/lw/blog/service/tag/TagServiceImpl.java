@@ -1,12 +1,15 @@
 package com.lw.blog.service.tag;
 
+import com.lw.blog.dao.mongo.post.PostDaoImpl;
 import com.lw.blog.dao.mongo.tag.TagDao;
 import com.lw.blog.dao.mongo.tag.TagDaoImpl;
+import com.lw.blog.model.Post;
 import com.lw.blog.model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +19,8 @@ import java.util.List;
 public class TagServiceImpl implements TagService {
 	@Autowired
 	private TagDaoImpl tagDao;
+	@Autowired
+	private PostDaoImpl postDao;
 	public Tag getTagByClassName(String name) {
 		return tagDao.getTagByClassName(name);
 	}
@@ -80,6 +85,42 @@ public class TagServiceImpl implements TagService {
 		}catch (Exception e){
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	@Override
+	public boolean isExistTags(String tagsName) {
+		String[] tags=null;
+		List<String> taglist = new ArrayList<>();
+		if(!tagsName.contains("#")){
+			 taglist.add(tagsName);
+		}else {
+			tags = tagsName.split("#");
+			for (String tag :tags) {
+				taglist.add(tag);
+			}
+		}
+		if(tagDao.isExistTags(taglist)){
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public void updateTagofBlogId(String blogName, String blogTag) {
+		//get blog'id by blogname
+		Post post = postDao.findPostByName(blogName);
+		String postId = post.get_id();
+		//add id to all tags
+		if(!blogTag.contains("#")){
+			tagDao.updateTagofBlogId(blogTag,postId);
+		}else {
+			String tag[] = blogTag.split("#");
+			for (String s :tag) {
+				tagDao.updateTagofBlogId(s,postId);
+			}
+
 		}
 	}
 }

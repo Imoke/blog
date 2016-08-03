@@ -43,5 +43,4 @@ public class TagTest {
 		tagDao.insert(tag);
 	}
 
-
 }
