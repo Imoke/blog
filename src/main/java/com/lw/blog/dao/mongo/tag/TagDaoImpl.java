@@ -78,7 +78,7 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 		if(taglist.size()!=0){
 			for (String tag :taglist) {
 				Query query = new Query();
-				query.addCriteria(new Criteria().andOperator(Criteria.where("name").is(tag),
+				query.addCriteria(new Criteria().andOperator(Criteria.where("name_eng").is(tag),
 						Criteria.where("is_exist").is(true)));
 				if(this.find(query).size()==0){
 					return false;
@@ -93,20 +93,20 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 
 	@Override
 	public void updateTagofBlogId(String blogTag, String postId) {
-		Tag tag = this.findTagByName(blogTag);
-		if(tag.get_blog_id().size()==0){
-			List<String> tags = new ArrayList<>();
+		Tag tag = this.findTagByEngName(blogTag);
+		if(tag.get_blog_id()!=null&&!tag.get_blog_id().equals("")){
+			List<String> tags = tag.get_blog_id();
 			tags.add(postId);
 			Query query = new Query();
-			query.addCriteria(new Criteria("name").is(blogTag));
+			query.addCriteria(new Criteria("name_eng").is(blogTag));
 			Update update = new Update();
 			update.set("blog_id",tags);
 			this.update(query,update);
 		}else {
-			List<String> tags = tag.get_blog_id();
+			List<String> tags = new ArrayList<>();
 			tags.add(postId);
 			Query query = new Query();
-			query.addCriteria(new Criteria("name").is(blogTag));
+			query.addCriteria(new Criteria("name_eng").is(blogTag));
 			Update update = new Update();
 			update.set("blog_id",tags);
 			this.update(query,update);

@@ -109,16 +109,18 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public void updateTagofBlogId(String blogName, String blogTag) {
-		//get blog'id by blogname
+		String postId =null;
+				//get blog'id by blogname
 		Post post = postDao.findPostByName(blogName);
-		String postId = post.get_id();
+		postId = post.get_id();
 		//add id to all tags
-		if(!blogTag.contains("#")){
-			tagDao.updateTagofBlogId(blogTag,postId);
-		}else {
+		if(!blogTag.contains("#")) {
+			tagDao.updateTagofBlogId(blogTag, postId);
+		}
+		else {
 			String tag[] = blogTag.split("#");
 			for (String s :tag) {
-				tagDao.updateTagofBlogId(s,postId);
+				tagDao.updateTagofBlogId(s, postId);
 			}
 
 		}

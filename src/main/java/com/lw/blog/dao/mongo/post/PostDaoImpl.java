@@ -58,7 +58,7 @@ public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 	@Override
 	public Post findPostByName(String blogName) {
 		Query query = new Query();
-		query.addCriteria(new Criteria("name").is(blogName));
+		query.addCriteria(new Criteria("title").is(blogName));
 		return this.find(query).get(0);
 
 	}

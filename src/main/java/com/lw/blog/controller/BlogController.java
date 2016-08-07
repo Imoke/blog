@@ -5,6 +5,7 @@ import com.lw.blog.service.blog.BlogService;
 import com.lw.blog.service.tag.TagService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,11 @@ public class BlogController {
 	private BlogService blogService;
 	@Autowired
 	private TagService tagService;
+	@Value("#{configProperties['mdFile.path']}")
+	private String mdFilePath;
+	@Value("#{configProperties['imgFile.path']}")
+	private String imgFilePath;
+
 	private SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private static final Logger logger = Logger.getLogger(BlogController.class);
@@ -85,13 +91,17 @@ public class BlogController {
 		if(!name.equals("")&&name!=null){
 			List<String> postIdlist = tagService.getTagByClassName(name).get_blog_id();
 			List<Post> posts = new ArrayList<Post>();
+			if(postIdlist.size()!=0){
 			for (String postId : postIdlist ) {
 				//get blog by blog's id.
 				Post post = new Post();
 				post = blogService.getBlogById(postId);
 				posts.add(post);
 			}
-			return posts;
+			     return posts;
+			}else {
+				return null;
+			}
 		}else {
 			return null;
 		}
@@ -108,14 +118,16 @@ public class BlogController {
 		List<Integer> years = new ArrayList<Integer>();
 		List<Post> postList = blogService.getAllPosts();
 		//get years
-		int newYear = Integer.parseInt(format.format(postList.get(0).get_create_at()).substring(0,4));
-		int oldYear = Integer.parseInt(format.format(postList.get(postList.size()-1).get_create_at()).substring(0,4));
-		if (oldYear == newYear){
-			years.add(newYear);
-		}else {
-			int d_value = newYear - oldYear;
-			for (int i=0;i<=d_value;i++){
-				years.add(newYear-i);
+		if(postList.size()!=0) {
+			int newYear = Integer.parseInt(format.format(postList.get(0).get_create_at()).substring(0, 4));
+			int oldYear = Integer.parseInt(format.format(postList.get(postList.size() - 1).get_create_at()).substring(0, 4));
+			if (oldYear == newYear) {
+				years.add(newYear);
+			} else {
+				int d_value = newYear - oldYear;
+				for (int i = 0; i <= d_value; i++) {
+					years.add(newYear - i);
+				}
 			}
 		}
 		List<List<Post>> postPerYear =  new ArrayList<List<Post>>();
@@ -129,48 +141,82 @@ public class BlogController {
 
 	/**
 	 * file upload and add blog
-	 * @param file
+	 * @param file1
 	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/upload" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
 	@ResponseBody
-	public String upload(@RequestParam("add-blog") MultipartFile file,@RequestParam("add-blogName") String blogName ,
-						 @RequestParam("add-blogTag") String blogTag,@RequestParam("add-blogDes") String blogDes) throws IOException {
-		if (!file.isEmpty()) {
-			InputStream in = null;
-			OutputStream out = null;
+	public String upload(@RequestParam(value="add-blog", required=true) MultipartFile file1,@RequestParam(value="add-fig", required=false) MultipartFile file2,
+						 @RequestParam(value="add-blogName", required=true) String blogName , @RequestParam(value="add-blogTag", required=true) String blogTag,
+						 @RequestParam(value="add-blogDes", required=true) String blogDes,@RequestParam(value="add-blogEngName", required=true) String blogEngName) throws IOException {
 
+		if (!file1.isEmpty()) {
+			InputStream in1 = null;
+			OutputStream out1 = null;
+			String imgRealPath=null;
 			try {
 				// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
-				String webRootPath = System.getProperty("ft.webapp");
+				//String webRootPath = System.getProperty("ft.webapp");
 				String html = null;
 				//logger.info(webRootPath);
 				// String rootPath = System.getProperty("catalina.home");
-				File dir = new File(webRootPath + File.separator + "uploadFiles");
-				if (!dir.exists())
-					dir.mkdirs();
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-				in = file.getInputStream();
-				out = new FileOutputStream(serverFile);
+				//File dir = new File(webRootPath + File.separator + "uploadFiles");
+				File dirMd = new File(mdFilePath+blogEngName);
+				if (!dirMd.exists())
+					dirMd.mkdirs();
+				File serverFile = new File(dirMd.getAbsolutePath() + File.separator + file1.getOriginalFilename());
+				in1 = file1.getInputStream();
+				out1 = new FileOutputStream(serverFile);
 				byte[] b = new byte[1024];
 				int len = 0;
-				while ((len = in.read(b)) > 0) {
+				while ((len = in1.read(b)) > 0) {
 					html += new String(b,0,len,"UTF-8");
-					out.write(b, 0, len);
+					out1.write(b, 0, len);
 				}
-				out.close();
-				in.close();
+				out1.close();
+				in1.close();
+				if(file2!=null){
+					InputStream inImg = null;
+					OutputStream outImg = null;
+					try {
+						File dirImg = new File(imgFilePath+blogEngName);
+						if (!dirImg.exists())
+							dirImg.mkdirs();
+						imgRealPath = dirImg.getAbsolutePath() + File.separator + file2.getOriginalFilename();
+						File serverFileImg = new File(imgRealPath);
+						inImg = file2.getInputStream();
+						outImg = new FileOutputStream(serverFileImg);
+						byte[] b2 = new byte[1024];
+						int len2 = 0;
+						while ((len2 = inImg.read(b2)) > 0) {
+							outImg.write(b2, 0, len2);
+						}
+						outImg.close();
+						inImg.close();
+					}catch (Exception e){
+						return "fail";
+					}finally {
+						if (outImg != null) {
+							outImg.close();
+							outImg = null;
+						}
+
+						if (inImg != null) {
+							inImg.close();
+							inImg = null;
+						}
+					}
+				}
 				html = blogService.renderToHtml(html);
-				logger.info("Server File Location=" + serverFile.getAbsolutePath());
+			/*	logger.info("Server File Location=" + serverFile.getAbsolutePath());
 				logger.info("blogName:　" + blogName);
 				logger.info("blogTag: " + blogTag);
 				logger.info("blog: "+html);
-				logger.info("blogDes: "+blogDes);
+				logger.info("blogDes: "+blogDes);*/
 
 				//insert form to database
-
-				blogService.insertBlog2database(blogName, blogTag, html, blogDes);
+				blogService.insertBlog2database(blogName, blogTag, html, blogDes, imgRealPath);
 				//update tags info
 				tagService.updateTagofBlogId(blogName,blogTag);
 				return "success";
@@ -179,14 +225,14 @@ public class BlogController {
 
 				return "fail";
 			} finally {
-				if (out != null) {
-					out.close();
-					out = null;
+				if (out1 != null) {
+					out1.close();
+					out1 = null;
 				}
 
-				if (in != null) {
-					in.close();
-					in = null;
+				if (in1 != null) {
+					in1.close();
+					in1 = null;
 				}
 			}
 		} else {

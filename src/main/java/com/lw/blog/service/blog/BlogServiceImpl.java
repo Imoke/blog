@@ -60,7 +60,7 @@ public class BlogServiceImpl implements BlogService{
 		}
 	}
 
-	public void insertBlog2database(String blogName, String blogTag, String html, String blogDes) {
+	public void insertBlog2database(String blogName, String blogTag, String html, String blogDes,String imgRealPath) {
 		Post post = new Post();
 		post.set_title(blogName);
 		post.set_describe(blogDes);
@@ -68,18 +68,19 @@ public class BlogServiceImpl implements BlogService{
 		post.set_create_at(System.currentTimeMillis());
 		post.set_update_at(System.currentTimeMillis());
 		post.set_is_exist(true);
+		post.set_fig(imgRealPath);
 		String [] tags;
 		List<Tag> list = new ArrayList<>();
 		if(blogTag!=null) {
 			if(!blogTag.contains("#")){
 				Tag tag = new Tag();
-				tag = tagDao.findTagByName(blogTag);
+				tag = tagDao.findTagByEngName(blogTag);
 				list.add(tag);
 			}else {
 				tags = blogTag.split("#");
 				for (String s : tags) {
 					Tag tag = new Tag();
-					tag = tagDao.findTagByName(s);
+					tag = tagDao.findTagByEngName(s);
 					list.add(tag);
 				}
 			}

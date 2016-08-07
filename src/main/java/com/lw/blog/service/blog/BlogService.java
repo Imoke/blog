@@ -21,7 +21,7 @@ public interface BlogService {
 	List<Post> getBlogByYear(int year);
 	String renderToHtml(String markdownSource);
 	
-	void insertBlog2database(String blogName, String blogTag, String html, String blogDes);
+	void insertBlog2database(String blogName, String blogTag, String html, String blogDes,String imgRealPath);
 	
 	void updateBlog(String blogID, String blogName, String blogTag, String html);
 	

@@ -15,8 +15,8 @@
     <!-- 自动扫描Spring注解配置 -->
     <context:component-scan base-package="com.lw.blog"/>
 
-    <!--<mongo:mongo host="139.129.28.132" port="12345"/>-->
-    <mongo:mongo host="localhost" port="27017"/>
+    <mongo:mongo host="139.129.28.132" port="12345"/>
+    <!--<mongo:mongo host="localhost" port="27017"/>-->
     <!-- mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 -->
     <mongo:db-factory dbname="blog" mongo-ref="mongo"/>
 
@@ -45,7 +45,16 @@
         <!-- 配置的是用来去除class字段的 -->
         <constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
     </bean>
-
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:filePath.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties"/>
+    </bean>
     <context:annotation-config />
     <tx:annotation-driven proxy-target-class="true"/>
 
