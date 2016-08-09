@@ -1,0 +1,901 @@
+
+fieldset, hr {
+    border: 0
+}
+
+fieldset, ul {
+    margin: 0;
+    padding: 0
+}
+
+fieldset, hr, ul {
+    padding: 0
+}
+
+.arrowDown, .tabHome, .tileSec li {
+    text-align: center
+}
+
+.banner img, header .logo img {
+    max-width: 100%
+}
+
+.btn:focus, .btn:hover, .faq h3:focus, a, a:focus, a:hover, button, button:focus, textarea:focus {
+    outline: 0
+}
+
+html {
+    position: relative;
+    min-height: 100%
+}
+
+body {
+    background: #fff;
+    /*font: 13px cg_r, arial, sans-serif;*/
+    overflow-x: hidden
+}
+
+body, html {
+    height: 100%
+}
+
+ul {
+    list-style: none
+}
+
+/*p {
+    font-size: 15px;
+    font-family: rs_l, sans-serif;
+    color: #666;
+    letter-spacing: .01em;
+    word-spacing: .1em
+}*/
+
+a, a:focus, a:hover {
+    text-decoration: none
+}
+
+::selection {
+    background: #009CEE;
+    color: #fff;
+    text-shadow: none
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border-top: 1px solid #ccc;
+    margin: 1em 0
+}
+
+textarea {
+    resize: vertical
+}
+
+.browserupgrade {
+    margin: .2em 0;
+    background: #ccc;
+    color: #000;
+    padding: .2em 0
+}
+
+.hidden {
+    display: none !important
+}
+
+.clearfix:after, .clearfix:before {
+    content: " ";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
+
+.fp-tableCell {
+    padding-top: 63px
+}
+
+header .logo {
+    width: 125px;
+    margin: 0;
+    float: left
+}
+
+header {
+    padding: 10px 0 5px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(255, 255, 255, .95);
+    border-color: transparent;
+    transition: border .5s;
+    -webkit-transition: border .5s;
+    -moz-transition: border .5s
+}
+
+.headerDark {
+    background: 0 0
+}
+
+.logoDark {
+    display: none
+}
+
+.headSkin .logoDark {
+    display: block
+}
+
+.headSkin .logoLight, header nav ul li:first-child:before {
+    display: none
+}
+
+.headSkin {
+    border-bottom: solid 1px #ddd;
+    background-color: rgba(255, 255, 255, .95)
+}
+
+.fp-viewing-1 header {
+    border-bottom: 2px solid #F1F2F3
+}
+
+header nav {
+    float: right;
+    margin-top: 11px
+}
+
+header nav ul li {
+    float: left;
+    margin: 0 0 0 50px;
+    font-size: 13px;
+    position: relative
+}
+
+header nav ul li a.active:after, header nav ul li:before {
+    position: absolute;
+    content: ''
+}
+
+header nav ul li:before {
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    top: 9px;
+    left: -27px
+}
+
+header.headSkin nav ul li:before {
+    background: #a7a7a7
+}
+
+header nav ul li a {
+    color: #fff;
+    display: block;
+    line-height: 1;
+    padding: 4px
+}
+
+.headSkin .authentication a, header.headSkin nav ul li a {
+    color: #666
+}
+
+.authentication li a:focus, .authentication li a:hover, header nav ul li a.active, header nav ul li a:focus, header nav ul li a:hover {
+    color: #149bec
+}
+
+header nav ul li a.active:after {
+    left: 4px;
+    right: 4px;
+    height: 1px;
+    background: #149bec;
+    bottom: 0
+}
+
+.authentication {
+    float: right;
+    margin-left: 40px;
+    position: relative
+}
+
+.authentication:before {
+    position: absolute;
+    left: -10px;
+    width: 1px;
+    height: 16px;
+    background: #bbb;
+    content: '';
+    top: 15px
+}
+
+.authentication li {
+    float: left;
+    margin-left: 20px;
+    margin-top: 13px
+}
+
+.authentication li a {
+    color: #fff;
+    padding: 4px
+}
+
+.authentication .btn {
+    font-size: 13px;
+    padding: 7px 12px;
+    margin-top: -9px
+}
+
+.headSkin .authentication .btn {
+    border-color: #149bec;
+    color: #fff
+}
+
+.headSkin .authentication .btn:focus {
+    color: #666
+}
+
+.authentication .btn:hover {
+    background: #fff;
+    color: #666;
+    border-color: #149bec
+}
+
+.videoSec {
+    position: relative;
+    /*background: url(https://d1m7edx3gyy2dm.cloudfront.net/img/bg_video.jpg) no-repeat;*/
+    background-size: cover
+}
+
+.arrowDown, .bgPattern, .videoSec .videoCon {
+    position: absolute;
+    left: 0;
+    right: 0
+}
+
+.videoSec video {
+    margin: -2px 0
+}
+
+.arrowDown {
+    font-size: 40px;
+    color: #B5B5B5;
+    bottom: 65px;
+    padding: 10px 0
+}
+
+.arrowDown:focus, .arrowDown:hover {
+    color: #fff
+}
+
+.bgPattern {
+    background: url(https://d1m7edx3gyy2dm.cloudfront.net/img/bg_dots.png) rgba(0, 0, 0, .5);
+    top: 0;
+    bottom: -1px
+}
+
+.videoSec .videoCon {
+    top: 0;
+    bottom: 0;
+    text-align: center
+}
+
+.videoSec h1 {
+    font: 4.5em rs_r, arial, sans-serif;
+    color: #fff;
+    margin: -100px 0 45px;
+    display: inline-block;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, .5)
+}
+
+.videoSec h1 span {
+    display: block;
+    font: .3em rs_l, arial, sans-serif;
+    letter-spacing: 4px
+}
+
+.screenSec p i, .videoSec h1 span i {
+    font-style: normal
+}
+
+.oneSolution {
+    position: relative
+}
+
+.tableDisplay {
+    display: table;
+    height: 100%;
+    width: 100%
+}
+
+.vCenter {
+    display: table-cell
+}
+
+.tabHome li {
+    display: inline-block;
+    margin: 0 50px;
+    font-size: 14px;
+    color: #888;
+    line-height: 1.5
+}
+
+.tabHome {
+    margin-bottom: 30px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background: #fff;
+    display: none
+}
+
+.earlyAccessSec, .screenSec {
+    z-index: 2;
+    position: relative
+}
+
+.tabHome li a {
+    display: inline-block;
+    color: #888;
+    font-weight: 700;
+    padding: 5px 20px
+}
+
+.tabHome .active a, .tabHome li a:hover {
+    display: inline-block;
+    color: #fff;
+    background: #149BEC;
+    position: relative;
+    box-shadow: 0 3px 10px -2px #909090
+}
+
+.tabHome .active a:after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    margin-left: -10px;
+    bottom: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    border-color: #149BEC transparent transparent
+}
+
+.menuFea ul, .noBorder {
+    border-bottom: none
+}
+
+.tabHome [class^=icon-] {
+    font-size: 17px;
+    line-height: .9;
+    margin-right: 5px;
+    margin-top: -4px;
+    display: inline-block
+}
+
+.tileSec li {
+    width: 50%;
+    height: 250px;
+    float: left;
+    color: #fff;
+    padding: 20px
+}
+
+.tileCon, .tileSec li span {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle
+}
+
+.screenSec, .tileHead {
+    text-align: center
+}
+
+.tileSec li span {
+    font-size: 5em;
+    width: 1em;
+    margin-right: 20px;
+    color: #fff
+}
+
+.tileCon {
+    width: 45%
+}
+
+.tile1 {
+    background-color: #e36c4d
+}
+
+.tile2 {
+    background-color: #5ac6e3
+}
+
+.tile3 {
+    background-color: #22beb6
+}
+
+.tile4 {
+    background-color: #219cd7
+}
+
+.tileConÂ h3 {
+    font-size: 9em
+}
+
+.tileCon h3 {
+    font-size: 1.7em;
+    color: #fff
+}
+
+.tileHead {
+    background: #373737;
+    font-size: 30px;
+    padding: 20px 5px 35px
+}
+
+.tileHead h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    position: relative
+}
+
+.tileHead h2:after {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    content: '';
+    width: 80px;
+    height: 3px;
+    background: #149bec;
+    margin-left: -40px
+}
+
+.tileCon p {
+    color: #fff;
+    font-size: 15px;
+    opacity: .7
+}
+
+
+.earlyAccessSec.active {
+    background-position: center 0
+}
+
+.screenSec img {
+    width: 100%;
+    transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    -moz-transition: all 1.5s
+}
+
+.screenSec p {
+    color: #333;
+    font-size: 17px;
+    text-align: left;
+    margin: 11% 0;
+    line-height: 1.4
+}
+
+.banner, .menuFea, .menuFea ul {
+    text-align: center
+}
+
+.screenSec p i {
+    display: block
+}
+
+.screenSec p a {
+    display: inline-block;
+    font-size: 13px;
+    padding: 6px 10px;
+    margin: 25px 0 10px
+}
+
+.composeSec.screenSec p, .screenSec.analyticsSec p {
+    margin: 8.5% 0
+}
+
+.heading {
+    font-size: 30px;
+    color: #149BEC;
+    display: block;
+    margin: 0 0 20px;
+    line-height: 1.2
+}
+
+.evenBlock, .oddBlock {
+    background-color: #fafafa;
+    padding: 100px 0
+}
+
+.evenBlock {
+    background-color: #fff
+}
+
+.analyzeBlock .monitorFrame {
+    transform: translateX(-75px);
+    -webkit-transform: translateX(-75px);
+    -moz-transform: translateX(-75px)
+}
+
+.analyzeBlock.showContent .monitorFrame, .monitorBlock.showContent .monitorFrame, .publishBlock.showContent .monitorFrame {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    opacity: 1
+}
+
+.evenBlock .monitorFrame {
+    float: left;
+    margin-right: -10px;
+    margin-left: -200px
+}
+
+.frame {
+    width: 723px;
+    height: 454px;
+    position: absolute;
+    left: 113px;
+    top: 32px
+}
+
+.frame img {
+    width: 114%
+}
+
+.banner {
+    margin-top: 0;
+    position: relative
+}
+
+.banner img {
+    margin-top: -65px;
+    width: 100%
+}
+
+.menuFea {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1
+}
+
+.menuFea ul li a:hover, .nav-tabs > li.active > a:hover {
+    background: 0 0;
+    color: #149BEC;
+    border: none
+}
+
+.menuFea.fixedTop {
+    position: fixed;
+    top: 0;
+    z-index: 100
+}
+
+.browserFrame, .headerFea {
+    position: relative
+}
+
+.menuFea ul li {
+    display: inline-block;
+    margin: 0 40px;
+    float: none
+}
+
+.menuFea ul {
+    padding: 20px
+}
+
+.menuFea ul li a {
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    padding: 0
+}
+
+.menuFea ul li.active a, .nav-tabs > li.active > a:focus {
+    color: #149BEC;
+    background: 0 0;
+    border: none;
+    border-bottom: solid 1px #149BEC
+}
+
+.nav-tabs > li.active > a:hover {
+    border-bottom: solid 1px #149BEC
+}
+
+.browserFrame {
+    background: url(https://d1m7edx3gyy2dm.cloudfront.net/img/bg_frame_browser.png) no-repeat;
+    width: 630px;
+    height: 386px;
+    float: right;
+    margin-left: 70px;
+    margin-top: 20px;
+    box-shadow: 0 16px 10px -10px rgba(0, 0, 0, .3);
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px
+}
+
+.frameBrowser {
+    width: 630px;
+    height: 420px;
+    position: absolute;
+    top: 40px;
+    left: 0
+}
+
+.evenBlock .browserFrame {
+    float: left;
+    margin: 0 70px 0 0
+}
+
+.tab-content {
+    display: none
+}
+
+.tab-content.active {
+    display: block
+}
+
+.footer {
+    background-color: #fff;
+    color: #000;
+    border-top: solid 1px #ddd
+}
+
+.btn.btnSub {
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: top;
+    float: left;
+    height: 38px;
+    min-width: 150px
+}
+
+.btn.btnSub:hover {
+    border-color: #fff;
+    color: #149bec
+}
+
+.btn, .tabHome li a {
+    transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s
+}
+
+.btn {
+    background: #149bec;
+    border-radius: 0;
+    padding: 12px 20px;
+    font-size: 17px;
+    border: 1px solid #149bec
+}
+
+.btn.btn-inverse, .btn:focus, .btn:hover {
+    background: #fff;
+    color: #149bec;
+    border: 1px solid #149bec
+}
+
+.btn.btn-sm {
+    padding: 4px 20px;
+    font-family: tlm_light, arial, sans-serif
+}
+
+.btn-inverse:focus, .btn-inverse:hover {
+    background: #149bec;
+    border: 1px solid #149bec;
+    color: #fff;
+    outline: 0
+}
+
+.ui-widget-content .btn {
+    color: #fff;
+    font-family: cg_r, arial, sans-serif
+}
+
+.imageSec img, .testimonial .testi img, .ui-accordion figure img {
+    max-width: 100%
+}
+
+.e1 {
+    width: 170px;
+    height: 520px;
+    left: 139px;
+    top: 0
+}
+
+.e2 {
+    width: 206px;
+    height: 246px;
+    left: 317px;
+    top: 178px
+}
+
+.e3 {
+    width: 120px;
+    height: 165px;
+    left: 453px;
+    top: 9px
+}
+
+.e4 {
+    width: 233px;
+    height: 352px;
+    left: 588px;
+    top: 104px
+}
+
+.e5 {
+    width: 177px;
+    height: 260px;
+    left: 835px;
+    top: 0
+}
+
+.e6 {
+    width: 137px;
+    height: 520px;
+    left: 1016px;
+    top: 0
+}
+
+.mobileHeader, .navMenu, .teamSecMobile {
+    display: none
+}
+
+.agenciesCon, .benefitsSlack p, .benefitsSlack ul, .btnClose, .faq h2, .fbComp ul li, .iconPlay, .pricing h1, .selectNumbers h4, .selectNumbers ul, .slackHeader, .subHeading, .subHeading span, .videoBanner {
+    text-align: center
+}
+
+.mainHome {
+    margin-top: -16px
+}
+
+
+
+.imgBorder {
+    border: 5px solid #f1f1f1
+}
+
+
+
+
+.imageSec figure {
+    width: 400px;
+    display: inline-block;
+    border: 1px solid #ddd
+}
+
+
+
+@media only screen and (max-width: 1028px) {
+    body, html {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+        -moz-overflow-scrolling: touch
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .faqBlock ul, .pricingSec ul {
+        display: block
+    }
+
+    .selectNumbers ul {
+        width: auto
+    }
+
+    .selectNumbers ul li {
+        margin: 5px
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    .footContent > li:first-child, .navMenu {
+        width: 100%
+    }
+
+    body, html {
+        overflow-x: hidden
+    }
+
+    .teamSec, header {
+        display: none
+    }
+
+    .mobileHeader, .teamSecMobile {
+        display: block
+    }
+
+    .arrowDown, .navMenu, .videoSec video {
+        display: none
+    }
+
+    .mobileHeader img {
+        max-width: 100%
+    }
+
+    .navMenu {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 1);
+        padding: 80px 10px 10px
+    }
+
+    .navMenu .menu li a {
+        display: block;
+        padding: 10px;
+        border-bottom: solid 1px #ececec;
+        font-size: 15px
+    }
+
+    .main, .mainHome {
+        overflow: hidden;
+        margin-top: 58px
+    }
+
+    .mobileHeader {
+        overflow: hidden;
+        padding: 10px 0;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        background: rgba(255, 255, 255, .9);
+        z-index: 100;
+        width: 100%;
+        height: 58px;
+        border: none
+    }
+
+    .mobileHeader .logo {
+        margin: 0;
+        float: left !important;
+        width: 90px
+    }
+
+    .mobileHeader .icon-slide-lines {
+        float: right;
+        font-size: 16px;
+        margin: 13px 0 0;
+        color: #909090
+    }
+}
+
+@media only screen and (max-width: 640px) {
+
+    .evenBlock .container, .oddBlock .container {
+        padding: 0
+    }
+
+    .evenBlock .container p, .oddBlock .container p {
+        padding: 0 20px
+    }
+
+    .footContent {
+        padding: 25px 20px
+    }
+
+}
+
+@media only screen and (max-width: 360px) {
+    .footContent > li {
+        width: 100%;
+        margin: 0 10px 20px
+    }
+
+    .footContent > li.connect {
+        margin-top: 0
+    }
+}

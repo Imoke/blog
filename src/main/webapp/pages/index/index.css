@@ -1,0 +1,452 @@
+/* footer */
+.footer {
+    background-color: #fff;
+    color: #000;
+    border-top: solid 1px #ddd;
+}
+.footContent h4 {
+    color: #07a2ff;
+    font-size: 16px;
+    margin: 0 0 20px;
+}
+.footContent ul li {
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+.footContent ul li a {
+    color: #000;
+}
+.footContent ul li a:hover {
+    color: #07a2ff;
+    font-weight: bold;
+}
+.footContent {
+    overflow: hidden;
+    padding: 25px 0;
+    margin: 0 -20px;
+}
+.footContent input {
+    background: transparent;
+    border: solid 1px #149bec;
+    font-size: 13px;
+    padding: 10px;
+    height: 38px;
+    float: left;
+}
+.footContent > li.connect {
+    float: right;
+    width: 190px;
+}
+.footLink {
+    overflow: hidden;
+    padding: 10px 0;
+    border-top: solid 1px #d4d4d4;
+}
+.footLink small {
+    float: left;
+    font-size: 11px;
+    color: #000;
+}
+.footLink ul {
+    float: right;
+    text-align: right;
+    color: #000;
+    font-size: 11px;
+    margin: 0 -10px;
+}
+.footLink ul li a {
+    color: #000;
+}
+.footLink ul li a:hover {
+    text-decoration: underline;
+}
+.footLink ul li {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+.btn.btnSub {
+    font-size: 13px;
+    padding: 8px;
+    vertical-align: top;
+    float: left;
+    height: 38px;
+    min-width: 150px;
+    text-align: center;
+}
+.btn.btnSub:hover {
+    border-color: #fff;
+    color: #149bec;
+}
+.emailBlock {
+    margin-top: 20px;
+}
+.getStarted {
+    text-align: center;
+    min-height: 200px;
+    padding: 100px 0 100px;
+}
+.footSec {
+    text-align: center;
+    padding: 100px 0 150px;
+}
+.footSec .btn {
+    width: 250px;
+    font-size: 19px;
+    background: #FFFFFF;
+    color: #5D5D5D;
+    border-color: #fff;
+}
+.footSec .btn:hover {
+    background: #033E5A;
+    color: #fff;
+    border-color: #033E5A;
+    width: 300px;
+}
+.footContent  > li {
+    float: left;
+    width: 12%;
+    margin: 0 20px;
+}
+.footContent  > li a {
+    color: #fff;
+}
+.footContent  > li:first-child{
+    width: 14%;
+}
+.social {
+    text-align: left;
+}
+.social li {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    color: #fff;
+    margin-right: 5px;
+}
+.social li a {
+    display: block;
+    background: #333;
+}
+.footContent .social li a {
+    color: #fff;
+}
+.footContent .social li a:hover {
+    color: #fff;
+    box-shadow: 0 0 20px #000;
+}
+.social li a:hover {
+    box-shadow: 0 0 20px #000;
+}
+.social li .fb {
+    background: #3a5897;
+}
+.social li .tw {
+    background: #00acec;
+}
+.social li .in {
+    background: #0173b2;
+}
+.social li .gPlus {
+    background: #f73e29;
+}
+.social li a.uTube {
+    background: #CF3427 ;
+    font-size: 17px;
+    line-height: 33px;
+}
+
+/* pricing */
+.pricing {
+    margin-top: 100px;
+}
+.pricing h1 {
+    font: 45px 'rs_r', arial, sans-serif;
+    color: #149BEC;
+    text-align: left;
+    margin: 0 0 15px;
+}
+.subHeading {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.subHeading span {
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    margin: 10px 0;
+    color: #0B9DF5;
+}
+.selectNumbers h4 {
+    font: 20px 'rs_r';
+    text-align: center;
+    margin: 0 0 15px;
+}
+.selectNumbers ul {
+    background: #f5f4f4;
+    text-align: center;
+    width: 885px;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-top: solid 1px #DEDEDE;
+}
+.selectNumbers ul li {
+    display: inline-block;
+    margin: 0 31px;
+}
+.selectNumbers ul li a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 20px;
+    color: #000;
+}
+.selectNumbers ul li a:hover, .selectNumbers ul li a.active {
+    background: #149bec;
+    color: #fff;
+}
+.pricingSec {
+    width: 885px;
+    margin: 0 auto 100px;
+}
+.pricingSec ul {
+    overflow: hidden;
+    display: flex;
+    padding: 0 1px;
+}
+.pricingSec ul li {
+    flex: initial;
+    width: 100%;
+    border: solid 1px #ddd;
+    padding: 10px 25px 30px;
+    margin: 0 -1px;
+    background: #fff;
+}
+.pricingSec ul li.free {
+    width: 350px;
+    margin: 0 auto;
+}
+.pricingSec ul li h4 {
+    font: 25px 'rs_r', arial, sans-serif;
+}
+.pricingSec ul li.standard h4 {
+    color: #f07d4a;
+}
+.pricingSec ul li.premium h4 {
+    color: #149bec;
+}
+.pricingSec ul li.agency h4 {
+    color: #22beb6;
+}
+.pricingSec ul li h4 small {
+    display: block;
+    text-decoration: line-through;
+    font-size: 16px;
+    font-family: 'rs_l', arial, sans-serif;
+    color: #777;
+}
+.pricingSec ul li h2 {
+    font: 80px/56px 'rs_r', arial, sans-serif;
+    border-bottom: solid 3px #e5d267;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.pricingSec ul li h2 sup {
+    font: 26px 'rs_r', arial, sans-serif;
+    vertical-align: top;
+}
+.pricingSec ul li h2 small {
+    font: 20px 'rs_l', arial, sans-serif;
+}
+.pricingSec ul li h2 i {
+    display: block;
+    font: 12px 'rs_l', arial, sans-serif;
+    margin-top: 5px;
+    color: #6F6F6F;
+    margin: 5px 12px 0;
+}
+.pricingSec ul li p {
+    line-height: 1.9;
+    margin-bottom: 30px;
+    min-height: 308px;
+}
+.pricingSec ul li.free p {
+    min-height: 100px;
+}
+.standard ul li h2 {
+    border-bottom: solid 1px #333;
+}
+.pricing .btn {
+    display: block;
+}
+.standard .btn {
+    background: #f07d4a;
+    border-color: #f07d4a;
+}
+.premium .btn {
+    background: #149bec;
+    border-color: #149bec;
+}
+.agency .btn {
+    background: #22beb6;
+    border-color: #22beb6;
+}
+.free .btn {
+    background: #e5d267;
+    border-color: #e5d267;
+}
+.standard .btn:hover {
+    background: #fff;
+    border-color: #cf6638;
+    color: #333;
+}
+.premium .btn:hover {
+    background: #fff;
+    border-color: #0d84cb;
+    color: #333;
+}
+.agency .btn:hover {
+    background: #fff;
+    border-color: #1aa49d;
+    color: #333;
+}
+.free .btn:hover {
+    background: #fff;
+    border-color: #e5d267;
+    color: #333;
+}
+.pricingSec ul li.premium {
+    background: #f3f3f3;
+}
+
+.pricingSec ul li.standard h2 {
+    border-color: #f07d4a;
+}
+.pricingSec ul li.premium h2 {
+    border-color: #149bec;
+}
+.pricingSec ul li.agency h2 {
+    border-color: #22beb6;
+}
+.period {
+    text-align: right;
+    width: 800px;
+    margin: 0 auto;
+}
+.period ul {
+    overflow: hidden;
+    float: right;
+    padding: 0 1px;
+}
+.period ul li {
+    float: left;
+    margin: 0 0px;
+}
+.selectNumbers {
+    margin-bottom: 20px;
+    position: relative;
+}
+.freeLabel {
+    position: absolute;
+    top: 7px;
+    left: 100px;
+    width: 170px;
+    height: 64px;
+    background: url(../img/bg-free.png) no-repeat center;
+    background-size: 50%;
+}
+.period ul li a {
+    font: 15px 'rs_l', arial, sans-serif;
+    color: #000;
+    padding: 10px 20px;
+    border: solid 1px #000;
+    display: block;
+    background: #fff;
+    margin: 0 -1px;
+}
+.period ul li a:hover {
+    background: #F7F7F7;
+    color: #000;
+}
+.period ul li a.active {
+    background: #F7F7F7;
+    color: #B9B9B9;
+}
+.faqBlock {
+    padding: 50px 0;
+    background: #fafafa;
+}
+.faqBlock h3 {
+    text-align: center;
+    font: 30px 'rs_r', arial, sans-serif;
+    margin-bottom: 30px;
+    color: #149BEC;
+}
+.faqBlock ul {
+    display: flex;
+}
+.faqBlock ul li {
+    width: 100%;
+    margin: 0 30px;
+}
+.faqBlock ul li h4 {
+    font: 20px 'rs_r', arial, sans-serif;
+    margin: 0 0 10px;
+}
+.faqBlock ul li p {
+    color: #000;
+    line-height: 1.5;
+}
+.faqBlock ul li ul {
+    list-style: disc;
+    display: block;
+    font-family: 'rs_l', arial, sans-serif;
+    font-size: 15px;
+}
+.faqBlock ul li ul li {
+    margin: 10px 0 10px 15px;
+}
+.fiftyPlus {
+    border: solid 1px #ddd;
+    padding: 50px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+.fiftyPlus h1 {
+    margin: 0 0 40px;
+}
+.fiftyPlus h1 span {
+    color: #333;
+}
+.fiftyPlus .btn {
+    display: inline-block;
+    font-family: 'rs_r', arial, sans-serif;
+}
+.fiftyPlus p {
+    font-size: 18px;
+}
+.fiftyPlus p a {
+    font-family: 'rs_r';
+    color: #149BEC;
+    text-decoration: underline;
+}
+.fiftyPlus p a:hover {
+    color: #000;
+}
+.mandatory {
+    color: #ff0000;
+    display: inline-block;
+    margin: 0 2px;
+    font-size: 15px;
+}
+.comingSoon {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 12px;
+}
