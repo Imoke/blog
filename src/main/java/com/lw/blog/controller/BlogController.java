@@ -209,6 +209,13 @@ public class BlogController {
 					}
 				}
 				html = blogService.renderToHtml(html);
+				System.out.println("++++++++++++"+html);
+				String noNeed = "<p>null</p>";
+				String newHtml="";
+				if(html.startsWith(noNeed)){
+					newHtml = html.replaceFirst(noNeed," ");
+				}
+				System.out.println("=========="+newHtml);
 			/*	logger.info("Server File Location=" + serverFile.getAbsolutePath());
 				logger.info("blogName:　" + blogName);
 				logger.info("blogTag: " + blogTag);
@@ -216,7 +223,7 @@ public class BlogController {
 				logger.info("blogDes: "+blogDes);*/
 
 				//insert form to database
-				blogService.insertBlog2database(blogName, blogTag, html, blogDes, imgRealPath);
+				blogService.insertBlog2database(blogName, blogTag, newHtml, blogDes, imgRealPath);
 				//update tags info
 				tagService.updateTagofBlogId(blogName,blogTag);
 				return "success";
