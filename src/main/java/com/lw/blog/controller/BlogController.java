@@ -1,6 +1,7 @@
 package com.lw.blog.controller;
 
 import com.lw.blog.model.Post;
+import com.lw.blog.model.Tag;
 import com.lw.blog.service.blog.BlogService;
 import com.lw.blog.service.tag.TagService;
 import org.apache.log4j.Logger;
@@ -88,22 +89,28 @@ public class BlogController {
 	@RequestMapping("/blog-class/{name}")
 	@ResponseBody
 	public List<Post> getPostByClassName(@PathVariable String name){
+		List<Post> posts = new ArrayList<Post>();
 		if(!name.equals("")&&name!=null){
-			List<String> postIdlist = tagService.getTagByClassName(name).get_blog_id();
-			List<Post> posts = new ArrayList<Post>();
-			if(postIdlist.size()!=0){
-			for (String postId : postIdlist ) {
-				//get blog by blog's id.
-				Post post = new Post();
-				post = blogService.getBlogById(postId);
-				posts.add(post);
-			}
-			     return posts;
+			Tag tag = tagService.getTagByClassName(name);
+			if(tag!=null) {
+				List<String> postIdlist = tag.get_blog_id();
+
+				if (postIdlist!=null) {
+					for (String postId : postIdlist) {
+						//get blog by blog's id.
+						Post post = new Post();
+						post = blogService.getBlogById(postId);
+						posts.add(post);
+					}
+					return posts;
+				} else {
+					return posts;
+				}
 			}else {
-				return null;
+				return posts;
 			}
 		}else {
-			return null;
+			return posts;
 		}
 
 	}

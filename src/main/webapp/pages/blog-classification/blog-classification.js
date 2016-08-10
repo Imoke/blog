@@ -34,8 +34,8 @@ var themeApp = {
                 data:"",
                 dataType:"json",
                 success:function(data) {
-                    if (data == null) {
-                        var titleBlock = aTitleBlock(name, 0)
+                    if (data == "") {
+                        var titleBlock = aTitleBlock(name, 0);
                         $("#title_block").append(titleBlock);
                     }
                     else {

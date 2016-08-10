@@ -21,7 +21,11 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 	public Tag getTagByClassName(String name) {
 		Query query = new Query();
 		query.addCriteria(new Criteria("name_eng").is(name));
-		return this.find(query).get(0);
+		if(this.find(query).size()!=0){
+			return this.find(query).get(0);
+		}else {
+			return null;
+		}
 	}
 
 	public Tag findTagByName(String tagName) {
