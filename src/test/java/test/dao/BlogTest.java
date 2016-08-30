@@ -1,11 +1,8 @@
 package test.dao;
 
 		import com.lw.blog.dao.mongo.post.PostDaoImpl;
-		import com.lw.blog.dao.mongo.user.UserDaoImpl;
 		import com.lw.blog.model.Post;
 		import com.lw.blog.model.Tag;
-		import com.lw.blog.model.user.User;
-		import com.lw.blog.model.user.Username;
 		import org.junit.Before;
 		import org.junit.Test;
 		import org.springframework.context.ConfigurableApplicationContext;

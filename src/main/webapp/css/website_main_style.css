@@ -68,10 +68,6 @@ hr {
     margin: 1em 0
 }
 
-textarea {
-    resize: vertical
-}
-
 .browserupgrade {
     margin: .2em 0;
     background: #ccc;

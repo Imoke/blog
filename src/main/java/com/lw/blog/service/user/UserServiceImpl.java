@@ -2,7 +2,7 @@ package com.lw.blog.service.user;
 
 
 import com.lw.blog.dao.mongo.user.UserDao;
-import com.lw.blog.model.user.User;
+import com.lw.blog.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,5 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
-	public User findUserByName(String username) {
-		return userDao.findUserByName(username);
-	}
+
 }

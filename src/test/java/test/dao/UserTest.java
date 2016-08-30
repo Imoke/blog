@@ -3,12 +3,15 @@ package test.dao;
 
 
 import com.lw.blog.dao.mongo.user.UserDaoImpl;
-import com.lw.blog.model.user.User;
-import com.lw.blog.model.user.Username;
+import com.lw.blog.model.User;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by LWang on 2016/4/20.
@@ -27,11 +30,14 @@ public class UserTest {
 	@Test
 	public void testInsert(){
 		User user = new User();
-		user.setAge(13);
-		Username username = new Username();
-		username.setUsername("lww");
-		username.setNickname("yby");
-		user.setName(username);
+		user.set_isThirdPart(true);
+		List<Long> loginTimes = new ArrayList<>();
+		loginTimes.add(System.currentTimeMillis());
+		loginTimes.add(System.currentTimeMillis());
+		user.set_loginTime(loginTimes);
+		user.set_thirdPart("weibo");
+		user.set_userIcon("null");
+		user.set_userName("www");
 		userDao.insert(user);
 	}
 

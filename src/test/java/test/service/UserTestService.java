@@ -1,11 +1,8 @@
 package test.service;
 
 import com.lw.blog.dao.mongo.user.UserDaoImpl;
-import com.lw.blog.model.user.User;
-import com.lw.blog.model.user.Username;
 import com.lw.blog.service.user.UserServiceImpl;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -23,12 +20,6 @@ public class UserTestService {
 		context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		userDao = context.getBean(UserDaoImpl.class);
 		userService = context.getBean(UserServiceImpl.class);
-	}
-
-	@Test
-	public void testFindUserByName(){
-		User user = userService.findUserByName("lww");
-		System.out.println(user.getName()+"  "+user.getAge());
 	}
 
 

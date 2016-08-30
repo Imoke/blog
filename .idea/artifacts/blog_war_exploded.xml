@@ -47,7 +47,6 @@
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-tree:5.0.3" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-analysis:5.0.3" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm-util:5.0.3" />
-          <element id="library" level="project" name="Maven: org.python:jython-standalone:2.7.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

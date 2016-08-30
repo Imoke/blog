@@ -1,7 +1,7 @@
 package com.lw.blog.service.user;
 
 
-import com.lw.blog.model.user.User;
+import com.lw.blog.model.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +10,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-
-	public User findUserByName(String username);
 
 }
