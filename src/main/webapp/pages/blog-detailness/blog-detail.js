@@ -86,8 +86,8 @@ var themeApp = {
                                 '<p>'+replyContent+'</p> </div> </div> ' +
                                 '<div class="row"> <div class="col-md-10"> </div> ' +
                                 '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentReplyArea(\''+commentId+'\',\''+fromUserId+'\',\''+replyId+'\')">回复</a> </div>' +
-                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentReplyArea(\''+commentId+'\')">关闭</a> </div> </div>' +
-                                '<div id="showCommentArea'+commentId+'"></div> ' ;
+                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentReplyArea(\''+replyId+'\')">关闭</a> </div> </div>' +
+                                '<div id="showCommentReplyArea'+replyId+'"></div> ' ;
                         }
                         html+='<div class="row"><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
                             '<img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image"> </div> </div> ' +
@@ -97,7 +97,7 @@ var themeApp = {
                             '<div class="row"> <div class="col-md-10"> </div> ' +
                             '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentArea(\''+commentId+'\',\''+fromUserId+'\')">回复</a> </div>' +
                             '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentArea(\''+commentId+'\')">关闭</a> </div> </div>' +
-                            '<div id="showCommentArea'+replyId+'"></div> ' +
+                            '<div id="showCommentArea'+commentId+'"></div> ' +
                                 '<div>'+replyhtml+'</div>'+
                             '<hr>';
                         console.log( '<div id="showCommentArea'+commentId+'"></div> ');
@@ -248,25 +248,52 @@ function addReplyComment(commentId,fromUserId){
         success:function(data){
             console.log("addComment"+data);
             var commentNum = data.length;
-            for(var i=0; i<commentNum;i++){
+            var i;
+            var html="";
+            for( i=0; i<commentNum;i++){
                 var comment = data[i]._content;
                 var commentId = data[i]._commentId;
-                var html="";
-                html+='<div class="row"><div class="col-md-2"></div><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
+                var fromUserId = data[i]._fromUserId;
+                var fromUserName = data[i]._fromUserName;
+                var replyComment = data[i]._replyComment;
+                console.log("replyComment"+replyComment);
+                var replyNum = 0;
+                if(replyComment!=null){
+                    replyNum = replyComment.length;
+                }
+                var replyhtml = "";
+                console.log("commentId"+commentId);
+                for(var j=0;j<replyNum;j++){
+                    var replyId = replyComment[j]._id;
+                    var replyContent = replyComment[j]._content;
+                    var replyCommentTime = replyComment[j].commentTime;
+                    replyhtml+='<div class="row"><div class="col-md-2"></div><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
+                        '<img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image"> </div> </div> ' +
+                        '<div class="col-md-8 " > <div id="comment_content"> </div> ' +
+                        '<p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p> ' +
+                        '<p>'+replyContent+'</p> </div> </div> ' +
+                        '<div class="row"> <div class="col-md-10"> </div> ' +
+                        '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentReplyArea(\''+commentId+'\',\''+fromUserId+'\',\''+replyId+'\')">回复</a> </div>' +
+                        '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentReplyArea(\''+replyId+'\')">关闭</a> </div> </div>' +
+                        '<div id="showCommentReplyArea'+replyId+'"></div> ' ;
+                }
+                html+='<div class="row"><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
                     '<img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image"> </div> </div> ' +
-                    '<div class="col-md-8 " > <div id="comment_content"> </div> ' +
+                    '<div class="col-md-10 " > <div id="comment_content"> </div> ' +
                     '<p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p> ' +
                     '<p>'+comment+'</p> </div> </div> ' +
                     '<div class="row"> <div class="col-md-10"> </div> ' +
-                    '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentArea(\''+commentId+'\')">回复</a> </div>' +
+                    '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentArea(\''+commentId+'\',\''+fromUserId+'\')">回复</a> </div>' +
                     '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentArea(\''+commentId+'\')">关闭</a> </div> </div>' +
                     '<div id="showCommentArea'+commentId+'"></div> ' +
-                    '<div id="showComment'+commentId+'"></div> ' +
+                    '<div>'+replyhtml+'</div>'+
                     '<hr>';
+                console.log( '<div id="showCommentArea'+commentId+'"></div> ');
             }
 
             $("#blog-reply-comment-content").val("");//评论框中内容清空
-            hideCommentArea(commentId);//评论框去掉
+            hideCommentReplyArea(replyId);//评论框去掉
+            $("#blog-commemt-block").html("");
             $("#blog-commemt-block").append(html);
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -289,20 +316,30 @@ function showCommentArea(commentId,fromUserId){
     $(obj).html(commentArea);
 }
 
+function showCommentReplyArea(commentId,fromUserId,replyId){
+    var showCommentReplyAreaId = "showCommentReplyArea"+replyId;
+    console.log("showCommentReplyAreaId"+showCommentReplyAreaId);
+    var obj = document.getElementById(showCommentReplyAreaId);
+    var commentArea = '<form role="form"> <div class="form-group"> ' +
+        '<textarea id="blog-reply-comment-content" class="form-control" rows="3" placeholder="说点什么吧~~" ></textarea> ' +
+        '</div> </form> <div class="row"> <div class="col-md-10"> </div> ' +
+        '<div class="col-md-2"> <button  class="btn btn-primary blue" onclick="replyCommentValidateAndAdd(\''+commentId+'\',\''+fromUserId+'\')">提交</button> ' +
+        '</div> </div>';
+    $(obj).html(commentArea);
+}
 function hideCommentArea(commentId){
     var showCommentAreaId = "showCommentArea"+commentId;
     console.log("showCommentAreaId"+showCommentAreaId);
     var obj = document.getElementById(showCommentAreaId);
     $(obj).html("");
 }
-
-function showReplyComment(commentId){
-
-    var showCommentId = "showComment"+commentId;
-    console.log("showCommentId"+showCommentAreaId);
-    var obj = document.getElementById(showCommentId);
+function hideCommentReplyArea(replyId){
+    var showCommentReplyAreaId = "showCommentReplyArea"+replyId;
+    console.log("showCommentReplyArea"+showCommentReplyAreaId);
+    var obj = document.getElementById(showCommentReplyAreaId);
     $(obj).html("");
 }
+
 /*===========================
  2. Initialization
  ==========================*/
