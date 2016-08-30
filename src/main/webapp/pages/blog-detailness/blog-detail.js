@@ -76,6 +76,7 @@ var themeApp = {
                         var replyhtml = "";
                         console.log("commentId"+commentId);
                         for(var j=0;j<replyNum;j++){
+                            var replyId = replyComment[j]._id;
                             var replyContent = replyComment[j]._content;
                             var replyCommentTime = replyComment[j].commentTime;
                             replyhtml+='<div class="row"><div class="col-md-2"></div><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
@@ -84,8 +85,8 @@ var themeApp = {
                                 '<p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p> ' +
                                 '<p>'+replyContent+'</p> </div> </div> ' +
                                 '<div class="row"> <div class="col-md-10"> </div> ' +
-                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentArea(\''+commentId+'\',\''+fromUserId+'\')">回复</a> </div>' +
-                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentArea(\''+commentId+'\')">关闭</a> </div> </div>' +
+                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentReplyArea(\''+commentId+'\',\''+fromUserId+'\',\''+replyId+'\')">回复</a> </div>' +
+                                '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentReplyArea(\''+commentId+'\')">关闭</a> </div> </div>' +
                                 '<div id="showCommentArea'+commentId+'"></div> ' ;
                         }
                         html+='<div class="row"><div class="col-md-2"> <div href="#" class="thumbnail"> ' +
@@ -96,7 +97,7 @@ var themeApp = {
                             '<div class="row"> <div class="col-md-10"> </div> ' +
                             '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="showCommentArea(\''+commentId+'\',\''+fromUserId+'\')">回复</a> </div>' +
                             '<div class="col-md-1 " > <a href="javascript:void(0)" onclick="hideCommentArea(\''+commentId+'\')">关闭</a> </div> </div>' +
-                            '<div id="showCommentArea'+commentId+'"></div> ' +
+                            '<div id="showCommentArea'+replyId+'"></div> ' +
                                 '<div>'+replyhtml+'</div>'+
                             '<hr>';
                         console.log( '<div id="showCommentArea'+commentId+'"></div> ');
