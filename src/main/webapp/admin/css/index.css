@@ -1,0 +1,104 @@
+/*index.html*/
+#bottom-content-left,#bottom-content-right{
+    background-color: #3d3d3d;
+    height: 185px;
+}
+#bottom-content-left {
+    background-color: #222222;
+}
+#topology-chart{
+    height: 600px;
+    color: #6ea158;
+}
+#information_type{
+     margin-bottom: 10px;
+     font-size: 20px;
+}
+#colony-frame{
+    height: 320px;
+}
+/*首页右图表*/
+#node-ip{
+    font-size: 15px;
+}
+/*首页右上角红色table*/
+.index-table{
+    margin-top: 10px !important;
+    line-height: 12px !important;
+    font-size: 15px;
+}
+.index-table-left{
+    width: 60% !important;
+    color: #c8d7b1;
+    font-size: 15px;
+}
+/*右下角刷数据*/
+.real-time-content{
+    font-size: 15px;
+    color: #a4a2a4;
+}
+#real-time-content{
+    margin-top: 10px;
+    margin-bottom: 7px;
+    /*height:185px;*/
+}
+
+/*拓扑，图表按钮*/
+.btn-topology {
+    margin-left: 75%;
+    width: 60px;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn-graphic {
+    width: 60px;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+/*路径导航上的下拉框*/
+#nav-selection{
+    margin:auto;
+}
+.m-wrap {
+width: 120px !important;
+margin: auto;
+}
+.page-content .breadcrumb .dashboard-date-range {
+    margin: auto;
+}
+/*node.html 图表测试高度*/
+.charts-test{
+    height: 320px;
+    /*width: 480px;*/
+    margin: 15px;
+}
+
+.charts-hostLeft{
+    height: 320px;
+    /*width: 480px;*/
+    margin: 15px;
+    margin-right: 0px;
+}
+.charts-hostRight{
+    height: 320px;
+    /*width: 480px;*/
+    margin: 15px;
+    margin-left: 0px;
+}
+
+.charts-colonyAvg{
+    height: 400px;
+    /*width: 480px;*/
+    margin: 17px;
+}
+
+.input-append{
+    margin: auto;
+}
+/*对比页面图表样式*/
+.charts-compare{
+    width: auto;
+    height: 480px;
+}

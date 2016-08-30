@@ -1,0 +1,25 @@
+.table-hover{
+    font-size: 15px;
+}
+.btn-graphic{
+    position: relative;
+    left: 90%;
+}
+.table-cellpadding{
+    cellpadding:40px;
+}
+.text-set-center{
+    text-align: center !important;
+}
+#win{
+    display: none;
+    POSITION: absolute;
+    left: 50%;
+    width: 600px;
+    height: 400px;
+    margin-left: -300px;
+    margin-top: -200px;
+    border: 1px solid #888;
+    background-color: #edf;
+    text-align: center
+}

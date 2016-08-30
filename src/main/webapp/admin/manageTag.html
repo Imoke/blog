@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+	<meta charset="utf-8" />
+	<title>Cluster Management | LIBRA</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+
+	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="css/manager.css" rel="stylesheet" type="text/css"/>
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="css/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <link href="css/bootstrap-modal.css" rel="stylesheet" type="text/css"/>
+	<!-- END GLOBAL MANDATORY STYLES -->
+
+	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" type="text/css" href="css/select2_metro.css" />
+	<link rel="stylesheet" href="css/DT_bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.1.custom.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/multi-select-metro.css" />
+	<!-- END PAGE LEVEL STYLES -->
+	<link rel="shortcut icon" href="image/favicon.ico" />
+    <!--APPEND CSS-->
+    <style>
+        #all-result{
+            text-align: center;
+        }
+        .table th, .table td {
+            line-height: 17px;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+	<!-- BEGIN HEADER -->
+	<div class="header navbar navbar-inverse navbar-fixed-top">
+		<!-- BEGIN TOP NAVIGATION BAR -->
+        <div class="navbar-inner" id="header"></div>
+		<!-- END TOP NAVIGATION BAR -->
+	</div>
+	<!-- END HEADER -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container row-fluid">
+		<!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar nav-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu">
+                <li>
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <div class="sidebar-toggler hidden-phone"></div>
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                </li>
+
+                <li class="">
+                    <a href="manageTag.html" >
+                        <i class="icon-th"></i>
+                        <span class="title">标签管理</span>
+                        <span class="selected"></span>
+                    </a>
+
+                </li>
+                <li class="">
+                    <a href="manageBlog.html" >
+                        <i class="icon-folder-open"></i>
+                        <span class="title">博客管理</span>
+                        <span class="selected "></span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+		<!-- END SIDEBAR -->
+
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN PAGE CONTAINER-->
+
+
+
+			<div class="container-fluid">
+				<!-- BEGIN PAGE HEADER-->
+				<div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+						<h3 class="page-title">
+                            标签管理
+						</h3>
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home"></i>
+								<a href="#">Home</a>
+								<i class="icon-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">标签管理</a>
+							</li>
+						</ul>
+						<!-- END PAGE TITLE & BREADCRUMB-->
+					</div>
+
+				</div>
+
+				<!-- END PAGE HEADER-->
+
+				<!-- BEGIN PAGE CONTENT-->
+                <div class="row-fluid">
+					<div class="span12">
+						<!-- BEGIN EXAMPLE TABLE PORTLET-->
+						<div class="portlet box grey">
+							<div class="portlet-title">
+								<div class="caption"><i class="icon-edit"></i>标签信息列表</div>
+                                <div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+								</div>
+							</div>
+							<div class="portlet-body">
+                                <div class="clearfix">
+									<div class="btn-group">
+                                        <a class="btn green " data-toggle="modal"  data-backdrop="static" data-target="#add-responsive">
+                                             添加标签
+                                             <i class="icon-plus"></i>
+                                        </a>
+									</div>
+									<div class="btn-group pull-right">
+									</div>
+								</div>
+                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%"><strong>标签ID</strong></th>
+                                            <th><strong>标签名</strong></th>
+                                            <th><strong>标签别名</strong></th>
+                                            <th><strong>创建时间</strong></th>
+                                            <th><strong>修改时间</strong></th>
+                                            <th><strong>是否存在</strong></th>
+                                            <th width="20%"><strong>操作</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="hostInfo">
+                                    </tbody>
+								</table>
+                            </div>
+                        </div>
+                    </div>
+						<!-- END EXAMPLE TABLE PORTLET-->
+                </div>
+
+				</div>
+				<!-- END PAGE CONTENT -->
+			</div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+
+	<!-- END CONTAINER -->
+
+    <!-- 新增标签弹出框 START-->
+   <div id="add-responsive" class="modal hide fade" tabindex="-1" role="dialog" aria-labellebel="responsive" aria-hidden="true">
+        <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h3>添加标签</h3>
+        </div>
+       <div class="modal-body" >
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="portlet_tab1">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="add-tag-form">
+
+                        <div class="control-group">
+                            <label class="control-label">标签名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="中文或英文" class="m-wrap medium" name="add-tagName" autocomplete="off">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">标签别名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="英文" class="m-wrap medium" name="add-tagEngName" autocomplete="off">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+        </div>
+       <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+           <button type="button" class="btn btn-primary blue" id="addTag">保存</button>
+       </div>
+   </div>
+    <!-- 新增集群弹出框 END-->
+
+    <!-- 编辑集群弹出框 START-->
+   <div id="edit-responsive" class="modal hide fade" tabindex="-1" role="dialog" aria-labellebel="responsive" aria-hidden="true">
+        <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h3>编辑标签</h3>
+        </div>
+        <div class="modal-body" >
+            <div class="tab-content">
+                <div class="tab-pane active" id="portlet_tab2">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal" id="edit-tag-form">
+
+                        <div class="control-group">
+                            <label class="control-label">标签ID</label>
+                            <div class="controls">
+                                <input type="text"   class="m-wrap medium" name="edit-tagId" disabled>
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">标签名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="中文或英文" class="m-wrap medium" name="edit-tagName">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">标签别名</label>
+                            <div class="controls">
+                                <input type="text" placeholder="英文" class="m-wrap medium" name="edit-tagEngName">
+                                <span class="help-inline"></span>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- END FORM-->
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary blue" id="editTag">保存</button>
+        </div>
+   </div>
+    <!-- 编辑集群弹出框 END-->
+
+    <!-- 结果弹出框 START-->
+   <div id="result-responsive" class="modal hide fade" tabindex="-1" role="dialog" aria-labellebel="responsive" aria-hidden="true">
+        <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h3></h3>
+        </div>
+        <div class="modal-body" >
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="portlet_tab3">
+                    <h2 id="all-result"></h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default blue" data-dismiss="modal">确定</button>
+        </div>
+   </div>
+    <!-- 结果弹出框 END-->
+
+	<!-- BEGIN FOOTER -->
+	<!-- END FOOTER -->
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->
+	<script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
+
+	<script src="js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+
+	<!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js' %} before bootstrap.min.js' %} to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+	<script src="js/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--[if lt IE 9]>
+
+	<script src="js/excanvas.min.js"></script>
+
+	<script src="js/respond.min.js"></script>
+
+	<![endif]-->   
+
+	<script src="js/jquery.slimscroll.min.js" type="text/javascript"></script>
+
+	<script src="js/jquery.blockui.min.js" type="text/javascript"></script>
+
+	<script src="js/jquery.cookie.min.js" type="text/javascript"></script>
+    <script src="js/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="js/jquery.uniform.min.js" type="text/javascript" ></script>
+
+    <script src="js/bootstrap-modal.js" type="text/javascript" ></script>
+
+    <script src="js/bootstrap-modalmanager.js" type="text/javascript" ></script>
+
+	<!-- END CORE PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+	<script type="text/javascript" src="js/select2.min.js"></script>
+
+	<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+
+	<script type="text/javascript" src="js/DT_bootstrap.js"></script>
+
+	<!-- END PAGE LEVEL PLUGINS -->
+
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+	<script src="js/app.js"></script>
+
+	<script src="manageTag.js"></script>
+	<script src="js/validate.js"></script>
+
+    <script src="js/ui-modals.js"></script>
+
+	<script>
+
+		jQuery(document).ready(function() {
+		   App.init();
+           UIModals.init();
+           manageTags.init();
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+		});
+
+	</script>
+
+</body>
+<!-- END BODY -->
+
+</html>

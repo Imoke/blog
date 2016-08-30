@@ -1,0 +1,78 @@
+<div class="container-fluid">
+
+    <!-- BEGIN LOGO -->
+
+    <a class="brand" href="">
+
+    <img src="" alt="logo" id="srcImg"/>
+
+    </a>
+
+    <!-- END LOGO -->
+
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+    <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+        <img src="" alt="" />
+
+    </a>
+
+    <!-- END RESPONSIVE MENU TOGGLER -->
+
+    <!-- BEGIN TOP NAVIGATION MENU -->
+
+   <!-- <ul class="nav pull-right">
+        &lt;!&ndash; BEGIN USER LOGIN DROPDOWN &ndash;&gt;
+
+        <li class="dropdown user">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <img alt="" src="media/image/avatar1_small.jpg" />
+            <img alt="" src="" style="height: 29px"/>
+            <span class="username" style="font-size: medium"><strong>username</strong></span>
+            <i class="icon-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="/person/profile/"><i class="icon-user"></i> 用户信息</a></li>
+                <li class="divider"></li>
+                <li><a onclick="logout()" href="javascript:;"><i class="icon-key"></i> 退出</a></li>
+            </ul>
+        </li>
+
+        &lt;!&ndash; END USER LOGIN DROPDOWN &ndash;&gt;
+
+    </ul>-->
+
+    <!-- END TOP NAVIGATION MENU -->
+
+</div>
+
+<!-- 编辑集群弹出框 START-->
+<div id="img-responsive" class="modal hide fade" tabindex="-1" role="dialog" aria-labellebel="responsive" aria-hidden="true">
+    <div class="modal-header" >
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3></h3>
+    </div>
+    <div class="modal-body" >
+        <div class="tab-content">
+            <div class="tab-pane active" id="portlet_tab1">
+                <img src="" alt="logo" height="100px"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#srcImg').live('click', function (e) {
+
+        e.preventDefault();
+        $("#img-responsive").modal('show');})
+    function logout() {
+        var href = window.location.href;
+        var urls = href.split('/');
+        var next = '/'+urls[urls.length-3]+'/'+urls[urls.length-2]+'/';
+        window.location.href = '/main/logout/?next='+next;
+    }
+</script>
