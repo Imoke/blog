@@ -129,70 +129,79 @@
 
             <!--评论区-->
             <div id="blog-commemt-block" class="blog-comment">
-                <!--<div class="row">
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image">
-                        </div>
-                    </div>
-                    <div class="col-md-10 " >
-                        <div id="comment_content"> </div>
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image">
+            </div>
+            <!-- 登录模态框-->
+            <div class="modal fade" id="register-responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="registerModalLabel">登录可评论</h4>
                         </div>
-                    </div>
-                    <div class="col-md-9 " >
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/icon06.gif"  style="width: 50px;height: 50px" alt="user-image">
+                        <div class="modal-body">
+                        <form  class="form-horizontal" id="register-blog-form" enctype="multipart/form-data">
+
+                            <div class="control-group">
+                                <label class="control-label">用户名</label>
+                                <div class="controls">
+                                    <input type="text"  class="m-wrap medium" name="edit-blogID" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">密码</label>
+                                <div class="controls">
+                                    <input type="text"  class="m-wrap medium" name="edit-blogName">
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="col-md-10 " >
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary blue" id="register">注册</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
             </div>
 
+            <div class="modal fade" id="login-responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">登录可评论</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form  class="form-horizontal" id="edit-blog-form" enctype="multipart/form-data">
 
+                                <div class="control-group">
+                                    <label class="control-label">用户名</label>
+                                    <div class="controls">
+                                        <input type="text"  class="m-wrap medium" name="edit-blogID" >
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">密码</label>
+                                    <div class="controls">
+                                        <input type="text"  class="m-wrap medium" name="edit-blogName">
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+                            </form>
+                            <a id="register-link">没注册过，点这儿</a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary blue" id="login">登录</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
             <footer class="footer-block">
                 <address>
                     <p><div align=center ><strong>2016&nbsp;&copy;

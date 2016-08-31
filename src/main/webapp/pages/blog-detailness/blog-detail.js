@@ -343,7 +343,7 @@ function hideCommentReplyArea(replyId){
 
 function isLoginUser(){
     //alert("click textarea!!!");
-    //1.一个判断用户是否登录的请求（启动拦截器，获取session的信息）
+    //1.一个判断用户是否登录的请求（获取session的信息）
     //2.没登陆，评论区域置为不可用，弹出模态框，显示注册登录的界面
     //3.用户是登录过的，不做任何操作
     jQuery.ajax({
@@ -352,7 +352,10 @@ function isLoginUser(){
         data:"",
         dataType:"json",
         success:function(data){
-
+            console.log("data"+data);
+            if(data==false){
+                $("#login-responsive").modal('show');
+            }
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){
             console.log("error");
