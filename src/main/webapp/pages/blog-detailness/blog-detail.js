@@ -340,6 +340,28 @@ function hideCommentReplyArea(replyId){
     $(obj).html("");
 }
 
+
+function isLoginUser(){
+    //alert("click textarea!!!");
+    //1.一个判断用户是否登录的请求（启动拦截器，获取session的信息）
+    //2.没登陆，评论区域置为不可用，弹出模态框，显示注册登录的界面
+    //3.用户是登录过的，不做任何操作
+    jQuery.ajax({
+        type:"GET",
+        url:"../../user/isLogin.do",
+        data:"",
+        dataType:"json",
+        success:function(data){
+
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+            console.log("error");
+            console.log(XMLHttpRequest.status);
+            console.log(XMLHttpRequest.readyState);
+            console.log(textStatus);
+        }
+    });
+}
 /*===========================
  2. Initialization
  ==========================*/

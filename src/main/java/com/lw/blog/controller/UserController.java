@@ -8,10 +8,16 @@ package com.lw.blog.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+    @RequestMapping("/isLogin")
+    public boolean isUserLogin(){
+        //获取session 的信息
+        if(true){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
