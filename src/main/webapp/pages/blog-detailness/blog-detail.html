@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html class="no-js" lang="" xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,7 @@
     <!--<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1726156247" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -131,21 +132,21 @@
             <div id="blog-commemt-block" class="blog-comment">
 
             </div>
-            <!-- 登录模态框-->
+            <!-- 注册模态框-->
             <div class="modal fade" id="register-responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="registerModalLabel">登录可评论</h4>
+                            <h4 class="modal-title" id="registerModalLabel">用户注册</h4>
                         </div>
                         <div class="modal-body">
-                        <form  class="form-horizontal" id="register-blog-form" enctype="multipart/form-data">
+                        <form  class="form-horizontal" id="register-form" >
 
                             <div class="control-group">
                                 <label class="control-label">用户名</label>
                                 <div class="controls">
-                                    <input type="text"  class="m-wrap medium" name="edit-blogID" >
+                                    <input type="text"  class="m-wrap medium" name="register-username" id="register-username" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -153,7 +154,7 @@
                             <div class="control-group">
                                 <label class="control-label">密码</label>
                                 <div class="controls">
-                                    <input type="text"  class="m-wrap medium" name="edit-blogName">
+                                    <input type="text"  class="m-wrap medium" name="register-password" id="register-password">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -166,21 +167,21 @@
                     </div><!-- /.modal-content -->
                 </div><!-- /.modal -->
             </div>
-
-            <div class="modal fade" id="login-responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <!-- 登录模态框-->
+            <div class="modal fade" id="login-responsive" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">登录可评论</h4>
+                            <h4 class="modal-title" id="loginModalLabel">登录可评论</h4>
                         </div>
                         <div class="modal-body">
-                            <form  class="form-horizontal" id="edit-blog-form" enctype="multipart/form-data">
+                            <form  class="form-horizontal" id="login-form" enctype="multipart/form-data">
 
                                 <div class="control-group">
                                     <label class="control-label">用户名</label>
                                     <div class="controls">
-                                        <input type="text"  class="m-wrap medium" name="edit-blogID" >
+                                        <input type="text"  class="m-wrap medium" name="login-username" id="login-username">
                                         <span class="help-inline"></span>
                                     </div>
                                 </div>
@@ -188,12 +189,15 @@
                                 <div class="control-group">
                                     <label class="control-label">密码</label>
                                     <div class="controls">
-                                        <input type="text"  class="m-wrap medium" name="edit-blogName">
+                                        <input type="text"  class="m-wrap medium" name="login-password" id="login-password">
                                         <span class="help-inline"></span>
                                     </div>
                                 </div>
                             </form>
-                            <a id="register-link">没注册过，点这儿</a>
+                            <a href="javascript:void(0)" onclick="toRegister()" id="register-link">没注册过，点这儿</a>
+                            <div>
+                                <wb:login-button type="6,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

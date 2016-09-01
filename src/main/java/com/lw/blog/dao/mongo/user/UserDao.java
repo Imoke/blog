@@ -16,4 +16,12 @@ import java.util.List;
 @Transactional
 public interface UserDao {
 
+    void insertUserRegisterInfo(String username, String password);
+
+
+    boolean isUserNameExist(String username);
+
+    boolean isPasswordFit(String username, String password);
+
+    User findUserByUserName(String userName);
 }

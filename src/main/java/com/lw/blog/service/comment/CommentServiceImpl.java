@@ -42,7 +42,10 @@ public class CommentServiceImpl implements CommentService {
 			commentDao.insert(comment);
 			return true;
 			}else {
-				commentDao.updateCommentInfo(blogId,blog_comment,userId,cid,tid);
+				//根据userId 和 tid 获取用户的信息，比如用户名
+				String fromUserName = userdao.findOne(userId).get_userName();
+				String toUserName = userdao.findOne(tid).get_userName();
+				commentDao.updateCommentInfo(blogId,blog_comment,userId,cid,tid,fromUserName,toUserName);
 				return true;
 			}
 		}else {
@@ -52,7 +55,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public String validateBlogComment(String blog_comment) {
-		if(blog_comment.equals("")||blog_comment==null){
+		if(blog_comment.equals("")){
 			return "the content is not empty";
 		}else {
 			//评论是否出现不容许出现的词汇，如果有返回信息，没有返回null
@@ -78,10 +81,10 @@ public class CommentServiceImpl implements CommentService {
 				long commentTime = comment.get_commentTime();
 
 				User fromUser = userdao.findOne(fromUserId);
-				//User toUser = userdao.findOne(toUserId);
 				ShowComment showComment = new ShowComment();
 				showComment.set_commentId(blogCommentId);
 				showComment.set_content(blogComment);
+				showComment.set_fromUserId(fromUserId);
 				showComment.set_fromUserIcon(fromUser.get_userIcon());
 				showComment.set_fromUserName(fromUser.get_userName());
 				showComment.set_commentTime(commentTime);
