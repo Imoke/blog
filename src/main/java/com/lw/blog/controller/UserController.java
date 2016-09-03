@@ -109,4 +109,49 @@ public class UserController {
         return backMessage;
     }
 
+
+    @RequestMapping("/thirdPart_login")
+    @ResponseBody
+    public String  thirdPartLogin(@RequestParam (value = "username") String username ,
+                                  @RequestParam (value = "imageUrl") String imageUrl ,
+                             @RequestParam( value = "thirdPart") String thirdPart,
+                             Model model, HttpSession session){
+        String backMessage;
+        //首先把第三方的登录信息存入数据库
+        boolean isInsert = userService.insertThirdPartUserInfo(username,imageUrl,thirdPart);
+        //把用户名保存在session中
+        if(isInsert){
+        model.addAttribute("username",username);
+         Map modelMap = model.asMap();
+         for (Object modelKey : modelMap.keySet()) {
+               Object modelValue = modelMap.get(modelKey);
+               logger.info(modelKey + " -- " + modelValue);
+         }
+
+          Enumeration<String> e = session.getAttributeNames();
+          while (e.hasMoreElements()) {
+              String s = e.nextElement();
+               logger.info(s + " == " + session.getAttribute(s));
+          }
+          return "1";
+    }else{
+          return "0";
+    }}
+
+    /**
+     *
+     * @param register_username
+     * @return
+     */
+    @RequestMapping("/checkRegisterUserName")
+    @ResponseBody
+    public Boolean isExistUserName(@RequestParam String register_username){
+        boolean exist = false;
+        exist = userService.isExistLocalUserName(register_username);
+        if(exist){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }

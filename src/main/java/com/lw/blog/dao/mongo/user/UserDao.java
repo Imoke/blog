@@ -24,4 +24,6 @@ public interface UserDao {
     boolean isPasswordFit(String username, String password);
 
     User findUserByUserName(String userName);
+
+    List<User> findUserByLocalUserName(String username);
 }

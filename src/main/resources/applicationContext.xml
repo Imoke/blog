@@ -44,16 +44,16 @@
         <!-- 配置的是用来去除class字段的 -->
         <constructor-arg name="mongoConverter" ref="mappingMongoConverter" />
     </bean>
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="locations">
-            <list>
-                <value>classpath:filePath.properties</value>
-            </list>
-        </property>
-    </bean>
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
-        <property name="properties" ref="configProperties"/>
-    </bean>
+        <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+            <property name="locations">
+                <list>
+                    <value>classpath:filePath.properties</value>
+                </list>
+            </property>
+        </bean>
+        <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+            <property name="properties" ref="configProperties"/>
+        </bean>
     <context:annotation-config />
     <tx:annotation-driven proxy-target-class="true"/>
 

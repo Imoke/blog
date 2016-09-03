@@ -15,10 +15,14 @@ public class ReplyComment {
 	private String _fromUserId;
 	@Field("from_user_name")
 	private String _fromUserName;
+	@Field("from_user_icon")
+	private String _fromUserIcon;
 	@Field("to_user_id")
 	private String _toUserId;
 	@Field("to_user_name")
 	private String _toUserName;
+	@Field("to_user_icon")
+	private String _toUserIcon;
 	@Field("content")
 	private String _content;
 	@Field("comment_time")
@@ -30,11 +34,30 @@ public class ReplyComment {
 				"_id='" + _id + '\'' +
 				", _fromUserId='" + _fromUserId + '\'' +
 				", _fromUserName='" + _fromUserName + '\'' +
+				", _fromUserIcon='" + _fromUserIcon + '\'' +
 				", _toUserId='" + _toUserId + '\'' +
 				", _toUserName='" + _toUserName + '\'' +
+				", _toUserIcon='" + _toUserIcon + '\'' +
 				", _content='" + _content + '\'' +
 				", commentTime=" + commentTime +
 				'}';
+	}
+
+
+	public String get_fromUserIcon() {
+		return _fromUserIcon;
+	}
+
+	public void set_fromUserIcon(String _fromUserIcon) {
+		this._fromUserIcon = _fromUserIcon;
+	}
+
+	public String get_toUserIcon() {
+		return _toUserIcon;
+	}
+
+	public void set_toUserIcon(String _toUserIcon) {
+		this._toUserIcon = _toUserIcon;
 	}
 
 	public String get_fromUserName() {

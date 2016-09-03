@@ -67,5 +67,13 @@ public class UserDaoImpl extends BaseDao<User>implements UserDao {
 		return this.find(query).get(0);
 	}
 
+	@Override
+	public List<User> findUserByLocalUserName(String username) {
+		Query query = new Query();
+		query.addCriteria(new Criteria().andOperator(new Criteria("user_name").is(username),
+				new Criteria("is_third_part").is(false)));
+		return this.find(query);
+	}
+
 
 }

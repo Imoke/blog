@@ -146,7 +146,7 @@
                             <div class="control-group">
                                 <label class="control-label">用户名</label>
                                 <div class="controls">
-                                    <input type="text"  class="m-wrap medium" name="register-username" id="register-username" >
+                                    <input type="text"  class="m-wrap medium" name="register_username" id="register_username" >
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                             <div class="control-group">
                                 <label class="control-label">密码</label>
                                 <div class="controls">
-                                    <input type="text"  class="m-wrap medium" name="register-password" id="register-password">
+                                    <input type="text"  class="m-wrap medium" name="register_password" id="register_password">
                                     <span class="help-inline"></span>
                                 </div>
                             </div>
@@ -195,6 +195,8 @@
                                 </div>
                             </form>
                             <a href="javascript:void(0)" onclick="toRegister()" id="register-link">没注册过，点这儿</a>
+                            <hr>
+                            <h5>推荐使用第三方账户登录评论</h5>
                             <div>
                                 <wb:login-button type="6,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button>
                             </div>
@@ -225,6 +227,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../../bootstrap3.3.5/js/bootstrap.min.js"></script>
 <script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.validate.min.js"></script>
 <script src="blog-detail.js"></script>
 <script type="text/javascript">
     $('.btnMore').click(function() {

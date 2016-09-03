@@ -45,7 +45,9 @@ public class CommentServiceImpl implements CommentService {
 				//根据userId 和 tid 获取用户的信息，比如用户名
 				String fromUserName = userdao.findOne(userId).get_userName();
 				String toUserName = userdao.findOne(tid).get_userName();
-				commentDao.updateCommentInfo(blogId,blog_comment,userId,cid,tid,fromUserName,toUserName);
+				String fromUserIcon = userdao.findOne(userId).get_userIcon();
+				String toUserIcon = userdao.findOne(tid).get_userIcon();
+				commentDao.updateCommentInfo(blogId,blog_comment,userId,cid,tid,fromUserName,toUserName,fromUserIcon,toUserIcon);
 				return true;
 			}
 		}else {
