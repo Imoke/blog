@@ -147,16 +147,21 @@ public class BlogController {
 	}
 
 	/**
-	 * file upload and add blog
+	 *
 	 * @param file1
+	 * @param file2
+	 * @param blogName
+	 * @param blogTag
+	 * @param blogDes
+	 * @param blogEngName
 	 * @return
 	 * @throws IOException
 	 */
 	@RequestMapping(value="/upload" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
 	@ResponseBody
-	public String upload(@RequestParam(value="add-blog", required=true) MultipartFile file1,@RequestParam(value="add-fig", required=false) MultipartFile file2,
-						 @RequestParam(value="add-blogName", required=true) String blogName , @RequestParam(value="add-blogTag", required=true) String blogTag,
-						 @RequestParam(value="add-blogDes", required=true) String blogDes,@RequestParam(value="add-blogEngName", required=true) String blogEngName) throws IOException {
+	public String upload(@RequestParam(value="add-blog") MultipartFile file1,@RequestParam(value="add-fig", required=false) MultipartFile file2,
+						 @RequestParam(value="add-blogName") String blogName , @RequestParam(value="add-blogTag") String blogTag,
+						 @RequestParam(value="add-blogDes") String blogDes,@RequestParam(value="add-blogEngName") String blogEngName) throws IOException {
 
 		if (!file1.isEmpty()) {
 			InputStream in1 = null;

@@ -28,7 +28,8 @@ public class CommentDaoImpl extends BaseDao<Comment> implements CommentDao {
 	}
 
 	@Override
-	public void updateCommentInfo(String blogId, String blog_comment, String userId, String cid, String tid) {
+	public void updateCommentInfo(String blogId, String blog_comment, String userId, String cid, String tid ,
+								  String fromUserName,String toUserName,String fromUserIcon,String toUserIcon) {
 		Query query = new Query();
 		query.addCriteria(new Criteria("_id").is(cid));
 		List<ReplyComment> replyComments= this.find(query).get(0).get_replys();
@@ -37,7 +38,11 @@ public class CommentDaoImpl extends BaseDao<Comment> implements CommentDao {
 		replyComment.setCommentTime(System.currentTimeMillis());
 		replyComment.set_content(blog_comment);
 		replyComment.set_fromUserId(userId);
+		replyComment.set_fromUserName(fromUserName);
 		replyComment.set_toUserId(tid);
+		replyComment.set_toUserName(toUserName);
+		replyComment.set_fromUserIcon(fromUserIcon);
+		replyComment.set_toUserIcon(toUserIcon);
 		replyComment.set_id((System.currentTimeMillis()+"").trim());
 		if(replyComments==null){
 			List<ReplyComment> replyCommentList = new ArrayList<>();

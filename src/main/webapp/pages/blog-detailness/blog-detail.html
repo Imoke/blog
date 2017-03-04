@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html class="no-js" lang="" xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,7 @@
     <!--<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>-->
     <![endif]-->
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1726156247" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 
@@ -129,70 +130,84 @@
 
             <!--评论区-->
             <div id="blog-commemt-block" class="blog-comment">
-                <!--<div class="row">
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image">
-                        </div>
-                    </div>
-                    <div class="col-md-10 " >
-                        <div id="comment_content"> </div>
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/lww.png" style="width: 50px ;height: 50px" alt="user-image">
-                        </div>
-                    </div>
-                    <div class="col-md-9 " >
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <div href="#" class="thumbnail">
-                            <img src="../../img/icon06.gif"  style="width: 50px;height: 50px" alt="user-image">
-                        </div>
-                    </div>
-                    <div class="col-md-10 " >
-                        <p class="bg-primary">爱笑的眼睛&nbsp;&nbsp;&nbsp;2016-09-09</p>
-                        <p>jajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjjajsjja
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-11">
-                    </div>
-                    <div class="col-md-1 " >
-                        <a href="#" >回复</a>
-                    </div>
-                </div>-->
             </div>
+            <!-- 注册模态框-->
+            <div class="modal fade" id="register-responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="registerModalLabel">用户注册</h4>
+                        </div>
+                        <div class="modal-body">
+                        <form  class="form-horizontal" id="register-form" >
 
+                            <div class="control-group">
+                                <label class="control-label">用户名</label>
+                                <div class="controls">
+                                    <input type="text"  class="m-wrap medium" name="register_username" id="register_username" >
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
 
+                            <div class="control-group">
+                                <label class="control-label">密码</label>
+                                <div class="controls">
+                                    <input type="text"  class="m-wrap medium" name="register_password" id="register_password">
+                                    <span class="help-inline"></span>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary blue" id="register">注册</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+            <!-- 登录模态框-->
+            <div class="modal fade" id="login-responsive" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="loginModalLabel">登录可评论</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form  class="form-horizontal" id="login-form" enctype="multipart/form-data">
+
+                                <div class="control-group">
+                                    <label class="control-label">用户名</label>
+                                    <div class="controls">
+                                        <input type="text"  class="m-wrap medium" name="login-username" id="login-username">
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">密码</label>
+                                    <div class="controls">
+                                        <input type="text"  class="m-wrap medium" name="login-password" id="login-password">
+                                        <span class="help-inline"></span>
+                                    </div>
+                                </div>
+                            </form>
+                            <a href="javascript:void(0)" onclick="toRegister()" id="register-link">没注册过，点这儿</a>
+                            <hr>
+                            <h5>推荐使用第三方账户登录评论</h5>
+                            <div>
+                                <wb:login-button type="6,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary blue" id="login">登录</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
             <footer class="footer-block">
                 <address>
                     <p><div align=center ><strong>2016&nbsp;&copy;
@@ -212,6 +227,7 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../../bootstrap3.3.5/js/bootstrap.min.js"></script>
 <script src="../../js/jquery-ui.min.js"></script>
+<script src="../../js/jquery.validate.min.js"></script>
 <script src="blog-detail.js"></script>
 <script type="text/javascript">
     $('.btnMore').click(function() {

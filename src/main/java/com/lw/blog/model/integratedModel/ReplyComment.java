@@ -13,8 +13,16 @@ public class ReplyComment {
 	private String _id;
 	@Field("from_user_id")
 	private String _fromUserId;
+	@Field("from_user_name")
+	private String _fromUserName;
+	@Field("from_user_icon")
+	private String _fromUserIcon;
 	@Field("to_user_id")
 	private String _toUserId;
+	@Field("to_user_name")
+	private String _toUserName;
+	@Field("to_user_icon")
+	private String _toUserIcon;
 	@Field("content")
 	private String _content;
 	@Field("comment_time")
@@ -23,12 +31,49 @@ public class ReplyComment {
 	@Override
 	public String toString() {
 		return "ReplyComment{" +
-				"_content='" + _content + '\'' +
-				", _id='" + _id + '\'' +
+				"_id='" + _id + '\'' +
 				", _fromUserId='" + _fromUserId + '\'' +
+				", _fromUserName='" + _fromUserName + '\'' +
+				", _fromUserIcon='" + _fromUserIcon + '\'' +
 				", _toUserId='" + _toUserId + '\'' +
+				", _toUserName='" + _toUserName + '\'' +
+				", _toUserIcon='" + _toUserIcon + '\'' +
+				", _content='" + _content + '\'' +
 				", commentTime=" + commentTime +
 				'}';
+	}
+
+
+	public String get_fromUserIcon() {
+		return _fromUserIcon;
+	}
+
+	public void set_fromUserIcon(String _fromUserIcon) {
+		this._fromUserIcon = _fromUserIcon;
+	}
+
+	public String get_toUserIcon() {
+		return _toUserIcon;
+	}
+
+	public void set_toUserIcon(String _toUserIcon) {
+		this._toUserIcon = _toUserIcon;
+	}
+
+	public String get_fromUserName() {
+		return _fromUserName;
+	}
+
+	public void set_fromUserName(String _fromUserName) {
+		this._fromUserName = _fromUserName;
+	}
+
+	public String get_toUserName() {
+		return _toUserName;
+	}
+
+	public void set_toUserName(String _toUserName) {
+		this._toUserName = _toUserName;
 	}
 
 	public String get_content() {

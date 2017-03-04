@@ -11,4 +11,13 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
+    void userRegister(String username, String password);
+
+    String userLogin(String username, String password);
+
+    User findUserByUserName(String userName);
+
+    boolean insertThirdPartUserInfo(String username, String imageUrl, String thirdPart);
+
+    boolean isExistLocalUserName(String username);
 }

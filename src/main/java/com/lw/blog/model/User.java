@@ -29,6 +29,30 @@ public class User {
 	private List<Long> _loginTime;
 	@Field("is_third_part")
 	private Boolean _isThirdPart;
+	@Field("register_time")
+	private long _registerTime;
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"_id='" + _id + '\'' +
+				", _thirdPart='" + _thirdPart + '\'' +
+				", _userName='" + _userName + '\'' +
+				", _userIcon='" + _userIcon + '\'' +
+				", _userPassword='" + _userPassword + '\'' +
+				", _loginTime=" + _loginTime +
+				", _isThirdPart=" + _isThirdPart +
+				", _registerTime=" + _registerTime +
+				'}';
+	}
+
+	public long get_registerTime() {
+		return _registerTime;
+	}
+
+	public void set_registerTime(long _registerTime) {
+		this._registerTime = _registerTime;
+	}
 
 	public String get_id() {
 		return _id;
@@ -86,16 +110,4 @@ public class User {
 		this._userPassword = _userPassword;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"_id='" + _id + '\'' +
-				", _thirdPart='" + _thirdPart + '\'' +
-				", _userName='" + _userName + '\'' +
-				", _userIcon='" + _userIcon + '\'' +
-				", _userPassword='" + _userPassword + '\'' +
-				", _loginTime=" + _loginTime +
-				", _isThirdPart=" + _isThirdPart +
-				'}';
-	}
 }

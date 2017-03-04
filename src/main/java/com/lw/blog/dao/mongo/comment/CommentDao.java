@@ -16,5 +16,6 @@ public interface CommentDao {
 
 	List<Comment> findCommentByBlogId(String blogId);
 	
-	void updateCommentInfo(String blogId, String blog_comment, String userId, String cid, String tid);
+	void updateCommentInfo(String blogId, String blog_comment, String userId, String cid, String tid,String
+			fromUserName,String toUserName,String fromUserIcon,String toUserIcon);
 }
