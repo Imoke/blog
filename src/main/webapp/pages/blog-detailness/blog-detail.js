@@ -1,9 +1,8 @@
 /**
+ *
  * Created by LWang on 2016/7/15.
  */
-/**
- * Created by LWang on 2016/7/15.
- */
+
 /*====================================================
  TABLE OF CONTENT
  1. function declearetion
