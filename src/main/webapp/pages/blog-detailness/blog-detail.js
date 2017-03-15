@@ -43,7 +43,7 @@ var themeApp = {
                 $("#blog-id").val(data._id);
                 $("#blog-title").text(data._title);
                 $("#blog-create-at").text(getLocalTime(data._create_at));
-                $("#blog-content").html(data._content);
+                $("#blog-content").html(data._content_html);
             }
         });
     },

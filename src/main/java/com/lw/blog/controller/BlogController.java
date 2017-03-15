@@ -4,17 +4,22 @@ import com.lw.blog.model.Post;
 import com.lw.blog.model.Tag;
 import com.lw.blog.service.blog.BlogService;
 import com.lw.blog.service.tag.TagService;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ *
  * Created by LWang on 2016/7/17.
  */
 @Controller
@@ -26,6 +31,8 @@ public class BlogController {
 	private TagService tagService;
 	@Value("#{configProperties['mdFile.path']}")
 	private String mdFilePath;
+	@Value("#{configProperties['server.path']}")
+	private String serverPath;
 	@Value("#{configProperties['imgFile.path']}")
 	private String imgFilePath;
 
@@ -148,54 +155,42 @@ public class BlogController {
 
 	/**
 	 *
-	 * @param file1
+	 * @param request
+	 * @param newHtml
 	 * @param file2
 	 * @param blogName
 	 * @param blogTag
 	 * @param blogDes
 	 * @param blogEngName
+	 * @param markdown
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/upload" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
+	@RequestMapping(value="/uploadEditBlog" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
 	@ResponseBody
-	public String upload(@RequestParam(value="add-blog") MultipartFile file1,@RequestParam(value="add-fig", required=false) MultipartFile file2,
+	public String uploadEditBlog(HttpServletRequest request,@RequestParam(value="add-blog-html") String newHtml,@RequestParam(value="add-fig", required=false) MultipartFile file2,
 						 @RequestParam(value="add-blogName") String blogName , @RequestParam(value="add-blogTag") String blogTag,
-						 @RequestParam(value="add-blogDes") String blogDes,@RequestParam(value="add-blogEngName") String blogEngName) throws IOException {
+						 @RequestParam(value="add-blogDes") String blogDes,@RequestParam(value="add-blogEngName") String blogEngName,
+								 @RequestParam(value="add-blog-markdown") String markdown,
+								 @RequestParam(value="add-blogID") String blogId) throws IOException {
 
-		if (!file1.isEmpty()) {
-			InputStream in1 = null;
-			OutputStream out1 = null;
 			String imgRealPath=null;
+			String imgName = null;
 			try {
 				// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
 				//String webRootPath = System.getProperty("ft.webapp");
-				String html = null;
-				//logger.info(webRootPath);
-				// String rootPath = System.getProperty("catalina.home");
-				//File dir = new File(webRootPath + File.separator + "uploadFiles");
-				File dirMd = new File(mdFilePath+blogEngName);
-				if (!dirMd.exists())
-					dirMd.mkdirs();
-				File serverFile = new File(dirMd.getAbsolutePath() + File.separator + file1.getOriginalFilename());
-				in1 = file1.getInputStream();
-				out1 = new FileOutputStream(serverFile);
-				byte[] b = new byte[1024];
-				int len = 0;
-				while ((len = in1.read(b)) > 0) {
-					html += new String(b,0,len,"UTF-8");
-					out1.write(b, 0, len);
+				String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+				File filePath=new File(rootPath);
+				if(!filePath.exists()){
+					filePath.mkdirs();
 				}
-				out1.close();
-				in1.close();
+
 				if(file2!=null){
 					InputStream inImg = null;
 					OutputStream outImg = null;
 					try {
-						File dirImg = new File(imgFilePath+blogEngName);
-						if (!dirImg.exists())
-							dirImg.mkdirs();
-						imgRealPath = dirImg.getAbsolutePath() + File.separator + file2.getOriginalFilename();
+						imgRealPath = filePath.getAbsolutePath() + File.separator + file2.getOriginalFilename();
+						imgName = file2.getOriginalFilename();
 						File serverFileImg = new File(imgRealPath);
 						inImg = file2.getInputStream();
 						outImg = new FileOutputStream(serverFileImg);
@@ -220,116 +215,149 @@ public class BlogController {
 						}
 					}
 				}
-				html = blogService.renderToHtml(html);
-				System.out.println("++++++++++++"+html);
-				String noNeed = "<p>null</p>";
-				String newHtml="";
-				if(html.startsWith(noNeed)){
-					newHtml = html.replaceFirst(noNeed," ");
-				}
-				System.out.println("=========="+newHtml);
-			/*	logger.info("Server File Location=" + serverFile.getAbsolutePath());
-				logger.info("blogName:　" + blogName);
-				logger.info("blogTag: " + blogTag);
-				logger.info("blog: "+html);
-				logger.info("blogDes: "+blogDes);*/
+				//向后台数据库中传入数据
 
-				//insert form to database
-				blogService.insertBlog2database(blogName, blogTag, newHtml, blogDes, imgRealPath);
+				blogService.insertBlog2database(blogName, blogTag, newHtml, blogDes, imgName, markdown);
 				//update tags info
-				tagService.updateTagofBlogId(blogName,blogTag);
+				tagService.updateTagofBlogId(blogName, blogTag);
 				return "success";
-
 			} catch (Exception e) {
-
 				return "fail";
-			} finally {
-				if (out1 != null) {
-					out1.close();
-					out1 = null;
-				}
+			}
+	}
 
-				if (in1 != null) {
-					in1.close();
-					in1 = null;
+
+	@RequestMapping(value="/uploadUpdateBlog" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
+	@ResponseBody
+	public String uploadUpdateBlog(HttpServletRequest request,@RequestParam(value="add-blog-html") String newHtml,@RequestParam(value="add-fig", required=false) MultipartFile file2,
+								 @RequestParam(value="add-blogName") String blogName , @RequestParam(value="add-blogTag") String blogTag,
+								 @RequestParam(value="add-blogDes") String blogDes,@RequestParam(value="add-blogEngName") String blogEngName,
+								 @RequestParam(value="add-blogID") String blogId, @RequestParam(value="add-blog-markdown") String markdown) throws IOException {
+
+		String imgRealPath=null;
+		String imgName = null;
+		try {
+			// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
+			//String webRootPath = System.getProperty("ft.webapp");
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+			File filePath=new File(rootPath);
+			if(!filePath.exists()){
+				filePath.mkdirs();
+			}
+
+			if(file2!=null){
+				InputStream inImg = null;
+				OutputStream outImg = null;
+				try {
+					/*File dirImg = new File(rootPath+blogEngName);
+					if (!dirImg.exists())
+						dirImg.mkdirs();*/
+					imgRealPath = filePath.getAbsolutePath() + File.separator + file2.getOriginalFilename();
+					imgName = file2.getOriginalFilename();
+					File serverFileImg = new File(imgRealPath);
+					inImg = file2.getInputStream();
+					outImg = new FileOutputStream(serverFileImg);
+					byte[] b2 = new byte[1024];
+					int len2 = 0;
+					while ((len2 = inImg.read(b2)) > 0) {
+						outImg.write(b2, 0, len2);
+					}
+					outImg.close();
+					inImg.close();
+				}catch (Exception e){
+					return "fail";
+				}finally {
+					if (outImg != null) {
+						outImg.close();
+						outImg = null;
+					}
+
+					if (inImg != null) {
+						inImg.close();
+						inImg = null;
+					}
 				}
 			}
-		} else {
+			//向后台数据库中传入数据
 
-			return null;
+			blogService.updateBlog(blogId, blogName, blogTag, newHtml, markdown, blogDes, imgName);
+			//update tags info
+			tagService.updateTagofBlogId(blogName, blogTag);
+			return "success";
+
+		} catch (Exception e) {
+
+			return "fail";
 		}
+
 	}
 
 	/**
-	 * edit blog
-	 * @param file
-	 * @param blogName
-	 * @param blogTag
-	 * @param blogID
+	 *
+	 * @param request
+	 * @param imgFile
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/editBlog" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
+	@RequestMapping(value="/uploadImg" ,method = RequestMethod.POST, produces = "application/json;charset=utf8")
 	@ResponseBody
-	public String editBlog(@RequestParam("edit-blog") MultipartFile file,@RequestParam("edit-blogID") String blogID,
-						   @RequestParam("edit-blogName") String blogName , @RequestParam("edit-blogTag") String blogTag) throws IOException {
-		if (!file.isEmpty()) {
-			InputStream in = null;
-			OutputStream out = null;
+	public String uploadImg(HttpServletRequest request,@RequestParam(value="add-fig", required=true) MultipartFile imgFile
+								 ) throws IOException {
+		String imgName = null;
+		String imgRealPath = null;
+		try {
+			// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
+			//String webRootPath = System.getProperty("ft.webapp");
+			String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+			File filePath=new File(rootPath);
+			if(!filePath.exists()){
+				filePath.mkdirs();
+			}
 
-			try {
-				// 获得在tomcat中项目的路径， 需要在web.xml配置ft.webapp
-				String webRootPath = System.getProperty("ft.webapp");
-				String html = null;
-				//logger.info(webRootPath);
-				// String rootPath = System.getProperty("catalina.home");
-				File dir = new File(webRootPath + File.separator + "uploadFiles");
-				if (!dir.exists())
-					dir.mkdirs();
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
-				in = file.getInputStream();
-				out = new FileOutputStream(serverFile);
-				byte[] b = new byte[1024];
-				int len = 0;
-				while ((len = in.read(b)) > 0) {
-					html += new String(b,0,len,"UTF-8");
-					out.write(b, 0, len);
-				}
-				out.close();
-				in.close();
-				html = blogService.renderToHtml(html);
-				logger.info("Server File Location=" + serverFile.getAbsolutePath());
-				logger.info("blogName:　" + blogName);
-				logger.info("blogTag: " + blogTag);
-				logger.info("blog: "+html);
+			if(imgFile!=null){
+				InputStream inImg = null;
+				OutputStream outImg = null;
+				try {
+					File dirImg = new File(rootPath);
+					if (!dirImg.exists())
+						dirImg.mkdirs();
+					imgName = imgFile.getOriginalFilename();
+					imgRealPath = dirImg.getAbsolutePath() + File.separator + imgFile.getOriginalFilename();
+					File serverFileImg = new File(imgRealPath);
+					inImg = imgFile.getInputStream();
+					outImg = new FileOutputStream(serverFileImg);
+					byte[] b2 = new byte[1024];
+					int len2 = 0;
+					while ((len2 = inImg.read(b2)) > 0) {
+						outImg.write(b2, 0, len2);
+					}
+					outImg.close();
+					inImg.close();
+				}catch (Exception e){
+					return "fail";
+				}finally {
+					if (outImg != null) {
+						outImg.close();
+						outImg = null;
+					}
 
-
-				//insert form to database
-
-				blogService.updateBlog(blogID, blogName, blogTag, html);
-
-				return "success";
-
-			} catch (Exception e) {
-
-				return "fail";
-			} finally {
-				if (out != null) {
-					out.close();
-					out = null;
-				}
-
-				if (in != null) {
-					in.close();
-					in = null;
+					if (inImg != null) {
+						inImg.close();
+						inImg = null;
+					}
 				}
 			}
-		} else {
 
-			return null;
+			return "location: "+serverPath+"/resources/upload/" + imgName;
+		} catch (Exception e) {
+			return "fail";
 		}
 	}
-
+	/**
+	 *
+	 * @param blogId
+	 * @return
+	 */
 	@RequestMapping("/deleteBlog")
 	@ResponseBody
 	public Boolean deleteBlog(@RequestParam String blogId){

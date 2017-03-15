@@ -7,15 +7,35 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/data/mongo
-        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        ">
     <!-- 说明：下面有的Bean配置提供了多种方案，请根据需要采用某一种（别忘了注释掉其他同类方案） -->
 
     <!-- 自动扫描Spring注解配置 -->
     <context:component-scan base-package="com.lw.blog"/>
 
-    <mongo:mongo host="localhost" port="27017"/>
+   <!-- <mongo:mongo host="localhost" port="27017"/>-->
+
+    <context:property-placeholder location="classpath:mongo.properties"/>
+
+    <mongo:mongo host="${mongo.host}" port="${mongo.port}">
+        <mongo:options
+                connections-per-host="${mongo.connectionsPerHost}"
+                threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+                connect-timeout="${mongo.connectTimeout}"
+                max-wait-time="${mongo.maxWaitTime}"
+                auto-connect-retry="${mongo.autoConnectRetry}"
+                socket-keep-alive="${mongo.socketKeepAlive}"
+                socket-timeout="${mongo.socketTimeout}"
+                slave-ok="${mongo.slaveOk}"
+                write-number="1"
+                write-timeout="0"
+                write-fsync="true"/>
+    </mongo:mongo>
     <!-- mongo的工厂，通过它来取得mongo实例,dbname为mongodb的数据库名，没有的话会自动创建 -->
     <mongo:db-factory dbname="blog" mongo-ref="mongo"/>
 
@@ -56,6 +76,4 @@
         </bean>
     <context:annotation-config />
     <tx:annotation-driven proxy-target-class="true"/>
-
-
 </beans>

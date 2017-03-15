@@ -35,9 +35,12 @@ public class UserTest {
 		loginTimes.add(System.currentTimeMillis());
 		loginTimes.add(System.currentTimeMillis());
 		user.set_loginTime(loginTimes);
-		user.set_thirdPart("weibo");
+		user.set_isThirdPart(false);
+		//user.set_thirdPart(false);
 		user.set_userIcon("null");
-		user.set_userName("www");
+		user.set_userName("lww");
+		user.set_userPassword("lw13912034417");
+		user.set_authorities(1);
 		userDao.insert(user);
 	}
 

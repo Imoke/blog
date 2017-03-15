@@ -1,4 +1,5 @@
 /**
+ *
  * Created by LWang on 2016/7/15.
  */
 /*====================================================
@@ -81,6 +82,7 @@ var themeApp = {
 function aBlogBlock(id,title,createTime,describe,tags,fig){
     var tagblock = "";
     var field = "http://myliuwang.com";
+    var path1 = "/resources/upload/";
     var path = "/root/blogfile/fig/weixin.jpg";
     if(tags!=null) {
         for (var i = 0; i < tags.length; i++) {
@@ -89,7 +91,7 @@ function aBlogBlock(id,title,createTime,describe,tags,fig){
         if(fig!=null){
             return '<article id=' + id + ' class="post"> <div class="post-head"><h1 class="post-title">' +
                 '<a href="#"></a>' + title + '</h1> <div class="post-meta"><time class="post-date">发表于' + createTime + '</time> ' +
-                '</div> </div><div class="featured-media"> <a href="#"><img src="'+field+''+fig+'" ></a>' +
+                '</div> </div><div class="featured-media"> <a href="#"><img src="'+field+''+path1+''+fig+'" ></a>' +
                 ' </div><div class="post-content"> <p>' + describe + '</p> </div> <div class="post-permalink"> ' +
                 '<a href="../blog-detailness/blog-detail.html?id=' + id + '" class="btn btn-default">阅读全文</a> </div>' +
                 ' <footer class="post-footer clearfix"> <div class="pull-left tag-list"> <i class="fa fa-folder-open-o"></i> ' + tagblock + '</div>' +
@@ -101,7 +103,7 @@ function aBlogBlock(id,title,createTime,describe,tags,fig){
         if(fig!=null) {
             return '<article id=' + id + ' class="post"> <div class="post-head"><h1 class="post-title">' +
                 '<a href="#"></a>' + title + '</h1> <div class="post-meta"><time class="post-date">发表于' + createTime + '</time> ' +
-                '</div> </div><div class="featured-media"> <a href="#"><img src="'+field+''+fig+'" ></a>' +
+                '</div> </div><div class="featured-media"> <a href="#"><img src="'+field+''+path1+''+fig+'" ></a>' +
                 ' </div><div class="post-content"> <p>' + describe + '</p> </div> <div class="post-permalink"> ' +
                 '<a href="../blog-detailness/blog-detail.html?id=' + id + '" class="btn btn-default">阅读全文</a> </div> ' +
                 '<footer class="post-footer clearfix"> <div class="pull-left tag-list"> <i class="fa fa-folder-open-o">' +

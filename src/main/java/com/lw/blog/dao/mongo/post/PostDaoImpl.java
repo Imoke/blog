@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ *
  * Created by LWang on 2016/7/17.
  */
 
@@ -44,14 +45,20 @@ public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 		return this.find(query);
 	}
 
-	public void updateBlog(String blogID, String blogName, String blogTag, String html) {
+	public void updateBlog(String blogID, String blogName, String blogTag, String html,String markdown,String blogDes, String imgRealPath) {
 		Query query = new Query();
 		query.addCriteria(new Criteria("_id").is(blogID));
 		Update update = new Update();
 		update.set("title",blogName);
-		update.set("content",html);
+		update.set("content_html",html);
+		update.set("content_markdown",markdown);
+		update.set("describe",blogDes);
+		//update.set("tags",blogTag);
 		update.set("update_at",System.currentTimeMillis());
 		update.set("is_exist",true);
+		if(imgRealPath!=null&&!imgRealPath.equals("")){
+			update.set("fig",imgRealPath);
+		}
 		this.update(query, update);
 	}
 
@@ -60,7 +67,6 @@ public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 		Query query = new Query();
 		query.addCriteria(new Criteria("title").is(blogName));
 		return this.find(query).get(0);
-
 	}
 
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by LWang on 2016/7/17.
  */
 @Service
@@ -60,11 +61,12 @@ public class BlogServiceImpl implements BlogService{
 		}
 	}
 
-	public void insertBlog2database(String blogName, String blogTag, String html, String blogDes,String imgRealPath) {
+	public void insertBlog2database(String blogName, String blogTag, String html, String blogDes,String imgRealPath,String markdown) {
 		Post post = new Post();
 		post.set_title(blogName);
 		post.set_describe(blogDes);
-		post.set_content(html);
+		post.set_content_html(html);
+		post.set_content_markdown(markdown);
 		post.set_create_at(System.currentTimeMillis());
 		post.set_update_at(System.currentTimeMillis());
 		post.set_is_exist(true);
@@ -89,9 +91,9 @@ public class BlogServiceImpl implements BlogService{
 		postDao.insert(post);
 	}
 
-	public void updateBlog(String blogID, String blogName, String blogTag, String html) {
+	public void updateBlog(String blogID, String blogName, String blogTag, String html,String markdown,String blogDes, String imgRealPath) {
 
-		postDao.updateBlog(blogID,blogName,blogTag,html);
+		postDao.updateBlog(blogID,blogName,blogTag,html,markdown,blogDes,imgRealPath);
 
 	}
 

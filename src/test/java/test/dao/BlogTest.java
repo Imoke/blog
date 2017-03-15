@@ -29,7 +29,7 @@ public class BlogTest {
 		Post post = new Post();
 		post.set_title("Spring Framework Reference");
 		post.set_describe("Introduction to the Spring Framework");
-		post.set_content("The Spring Framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application.\n" +
+		post.set_content_html("The Spring Framework is a Java platform that provides comprehensive infrastructure support for developing Java applications. Spring handles the infrastructure so you can focus on your application.\n" +
 				"Spring enables you to build applications from \"plain old Java objects\" (POJOs) and to apply enterprise services non-invasively to POJOs. This capability applies to the Java SE programming model and to full and partial Java EE.\n" +
 				"Examples of how you, as an application developer, can benefit from the Spring platform:\n" +
 				"\n" +

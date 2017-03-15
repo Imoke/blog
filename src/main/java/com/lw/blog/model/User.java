@@ -31,11 +31,14 @@ public class User {
 	private Boolean _isThirdPart;
 	@Field("register_time")
 	private long _registerTime;
+	@Field("authorities")//1表示管理员
+	private int _authorities;
 
 	@Override
 	public String toString() {
 		return "User{" +
-				"_id='" + _id + '\'' +
+				"_authorities=" + _authorities +
+				", _id='" + _id + '\'' +
 				", _thirdPart='" + _thirdPart + '\'' +
 				", _userName='" + _userName + '\'' +
 				", _userIcon='" + _userIcon + '\'' +
@@ -44,6 +47,14 @@ public class User {
 				", _isThirdPart=" + _isThirdPart +
 				", _registerTime=" + _registerTime +
 				'}';
+	}
+
+	public int get_authorities() {
+		return _authorities;
+	}
+
+	public void set_authorities(int _authorities) {
+		this._authorities = _authorities;
 	}
 
 	public long get_registerTime() {

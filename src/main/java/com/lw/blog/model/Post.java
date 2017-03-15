@@ -18,8 +18,10 @@ public class Post {
 	private String _title;
 	@Field("describe")
 	private String _describe;
-	@Field("content")
-	private String _content;
+	@Field("content_html")
+	private String _content_html;
+	@Field("content_markdown")
+	private String _content_markdown;
 	@Field("create_at")
 	private long _create_at;
 	@Field("update_at")
@@ -31,28 +33,40 @@ public class Post {
 	@Field("fig")
 	private String _fig;
 
+	public String get_content_html() {
+		return _content_html;
+	}
+
+	public void set_content_html(String _content_html) {
+		this._content_html = _content_html;
+	}
+
+	public String get_content_markdown() {
+		return _content_markdown;
+	}
+
+	public void set_content_markdown(String _content_markdown) {
+		this._content_markdown = _content_markdown;
+	}
+
 	@Override
 	public String toString() {
 		return "Post{" +
-				"_content='" + _content + '\'' +
+
+				"_content_html='" + _content_html + '\'' +
 				", _id='" + _id + '\'' +
 				", _title='" + _title + '\'' +
 				", _describe='" + _describe + '\'' +
+				", _content_markdown='" + _content_markdown + '\'' +
 				", _create_at=" + _create_at +
 				", _update_at=" + _update_at +
 				", _tags=" + _tags +
 				", _is_exist=" + _is_exist +
-				", _fig=" + _fig +
+				", _fig='" + _fig + '\'' +
 				'}';
 	}
 
-	public String get_content() {
-		return _content;
-	}
 
-	public void set_content(String _content) {
-		this._content = _content;
-	}
 
 	public long get_create_at() {
 		return _create_at;

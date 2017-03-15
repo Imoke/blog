@@ -18,7 +18,7 @@ public interface PostDao {
 	
 	List<Post> findAllPosts();
 	
-	void updateBlog(String blogID, String blogName, String blogTag, String html);
+	void updateBlog(String blogID, String blogName, String blogTag, String html,String markdown,String blogDes, String imgRealPath);
 	
 	Post findPostByName(String blogName);
 }
