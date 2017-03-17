@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ *
  * Created by LWang on 2016/7/17.
  */
 
@@ -100,12 +101,14 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 		Tag tag = this.findTagByEngName(blogTag);
 		if(tag.get_blog_id()!=null&&!tag.get_blog_id().equals("")){
 			List<String> tags = tag.get_blog_id();
-			tags.add(postId);
-			Query query = new Query();
-			query.addCriteria(new Criteria("name_eng").is(blogTag));
-			Update update = new Update();
-			update.set("blog_id",tags);
-			this.update(query,update);
+			if(!tags.contains(postId)) {
+				tags.add(postId);
+				Query query = new Query();
+				query.addCriteria(new Criteria("name_eng").is(blogTag));
+				Update update = new Update();
+				update.set("blog_id", tags);
+				this.update(query, update);
+			}
 		}else {
 			List<String> tags = new ArrayList<>();
 			tags.add(postId);

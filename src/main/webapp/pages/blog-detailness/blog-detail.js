@@ -601,5 +601,6 @@ $('#register-form').validate({
  2. Initialization
  ==========================*/
 $(document).ready(function(){
+
     themeApp.init();
 });

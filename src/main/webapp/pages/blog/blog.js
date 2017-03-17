@@ -38,7 +38,17 @@ var themeApp = {
 
         console.log("4");
     },
-
+    showtags:function(){
+        jQuery.ajax({
+            type:"GET",
+            url:"../../tags/all.do",
+            data:"",
+            dataType:"json",
+            success:function(data){
+                $("#tagBlock").append(tagsBlock(data));
+            }
+        });
+    },
     showBlogs:function(){
         var page  = GetRequest();
         var url = "../../blog/"+page+".do";
@@ -76,7 +86,26 @@ var themeApp = {
     },
     init: function() {
         themeApp.showBlogs();
+        themeApp.showtags();
         themeApp.backToTop();
+    }
+}
+
+function tagsBlock(tags) {
+    var tag = "";
+    if (tags.length>0) {
+        for (var i = 0; i < tags.length; i++) {
+            var aTag = tags[i];
+            var blogNum = '';
+            console.log("123"+aTag._blog_id);
+            if(aTag._blog_id!=null){
+                blogNum = aTag._blog_id.length;
+            }else{
+                blogNum = 0;
+            }
+            tag += '<a href="../blog-classification/blog-class.html?name=' + aTag._name_eng + '">' + aTag._name + '(' +blogNum + ')</a>';
+        }
+        return '   <h3></h3> <br/><br/> <div class="widget"> <div class="content tag-cloud"> ' + tag + ' </div> </div>';
     }
 }
 function aBlogBlock(id,title,createTime,describe,tags,fig){

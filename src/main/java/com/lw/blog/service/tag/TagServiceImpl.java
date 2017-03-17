@@ -114,6 +114,7 @@ public class TagServiceImpl implements TagService {
 				//get blog'id by blogname
 		Post post = postDao.findPostByName(blogName);
 		postId = post.get_id();
+
 		//add id to all tags
 		if(!blogTag.contains("#")) {
 			tagDao.updateTagofBlogId(blogTag, postId);
