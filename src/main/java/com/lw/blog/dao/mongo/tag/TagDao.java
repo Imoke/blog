@@ -26,4 +26,8 @@ public interface TagDao {
 	boolean isExistTags(List<String> taglist);
 	
 	void updateTagofBlogId(String blogTag, String postId);
+	
+	List<Tag> findTagByBlogId(String postId);
+	
+	void updateTagBlogIdList(String tagName, List<String> blogId);
 }

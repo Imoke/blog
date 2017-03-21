@@ -59,7 +59,7 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 		query.addCriteria(new Criteria("_id").is(tagId));
 		Update update = new Update();
 		update.set("name",tag.get_name());
-		update.set("name_eng",tag.get_name_eng());
+		update.set("name_eng", tag.get_name_eng());
 		update.set("update_at",tag.get_update_at());
 		this.update(query,update);
 	}
@@ -100,6 +100,7 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 	public void updateTagofBlogId(String blogTag, String postId) {
 		Tag tag = this.findTagByEngName(blogTag);
 		if(tag.get_blog_id()!=null&&!tag.get_blog_id().equals("")){
+			//获取标签下的博客ID
 			List<String> tags = tag.get_blog_id();
 			if(!tags.contains(postId)) {
 				tags.add(postId);
@@ -119,4 +120,26 @@ public class TagDaoImpl extends BaseDao<Tag> implements TagDao {
 			this.update(query,update);
 		}
 	}
+
+	@Override
+	public List<Tag> findTagByBlogId(String postId) {
+		Query query = new Query();
+		query.addCriteria(new Criteria("blog_id").is(postId));
+		if(this.find(query).size()!=0){
+			return this.find(query);
+		}else {
+			return null;
+		}
+	}
+
+	@Override
+	public void updateTagBlogIdList(String tagName, List<String> blogId) {
+
+		Query query = new Query();
+		query.addCriteria(new Criteria("name_eng").is(tagName));
+		Update update = new Update();
+		update.set("blog_id", blogId);
+		this.update(query, update);
+		}
+
 }

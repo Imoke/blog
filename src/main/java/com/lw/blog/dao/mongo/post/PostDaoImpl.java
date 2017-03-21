@@ -2,8 +2,10 @@ package com.lw.blog.dao.mongo.post;
 
 import com.lw.blog.dao.mongo.common.BaseDao;
 import com.lw.blog.dao.mongo.common.util.Pagination;
+import com.lw.blog.dao.mongo.tag.TagDaoImpl;
 import com.lw.blog.model.Post;
 import com.lw.blog.model.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +27,8 @@ import java.util.List;
 public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 
 	private SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	@Autowired
+	private TagDaoImpl tagDao;
 
 	public long getAllPostsNumber() {
 		return this.findCount(new Query());
@@ -48,18 +53,35 @@ public class PostDaoImpl extends BaseDao<Post> implements PostDao {
 	public void updateBlog(String blogID, String blogName, String blogTag, String html,String markdown,String blogDes, String imgRealPath) {
 		Query query = new Query();
 		query.addCriteria(new Criteria("_id").is(blogID));
+		String [] tags;
+		List<Tag> list = new ArrayList<>();
+		if(blogTag!=null) {
+			if(!blogTag.contains("#")){
+				Tag tag = new Tag();
+				tag = tagDao.findTagByEngName(blogTag);
+				list.add(tag);
+			}else {
+				tags = blogTag.split("#");
+				for (String s : tags) {
+					Tag tag = new Tag();
+					tag = tagDao.findTagByEngName(s);
+					list.add(tag);
+				}
+			}
+		}
 		Update update = new Update();
 		update.set("title",blogName);
 		update.set("content_html",html);
 		update.set("content_markdown",markdown);
 		update.set("describe",blogDes);
-		//update.set("tags",blogTag);
+		update.set("tags",list);
 		update.set("update_at",System.currentTimeMillis());
 		update.set("is_exist",true);
 		if(imgRealPath!=null&&!imgRealPath.equals("")){
 			update.set("fig",imgRealPath);
 		}
 		this.update(query, update);
+
 	}
 
 	@Override

@@ -108,7 +108,10 @@ public class BlogController {
 						//get blog by blog's id.
 						Post post = new Post();
 						post = blogService.getBlogById(postId);
-						posts.add(post);
+						//标记为false的不显示
+						if(post.is_is_exist()) {
+							posts.add(post);
+						}
 					}
 					return posts;
 				} else {

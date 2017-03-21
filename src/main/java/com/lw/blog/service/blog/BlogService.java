@@ -26,4 +26,6 @@ public interface BlogService {
 	void updateBlog(String blogID, String blogName, String blogTag, String html,String markdown,String blogDes, String imgRealPath);
 	
 	boolean deleteBlog(String blogId);
+
+
 }

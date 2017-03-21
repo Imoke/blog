@@ -99,7 +99,16 @@ public class BlogServiceImpl implements BlogService{
 
 	public boolean deleteBlog(String blogId) {
 		boolean isDel = postDao.deleteBlog(blogId);
+		List<Tag> tagList = tagDao.findTagByBlogId(blogId);
+		for (Tag tag :tagList) {
+			List<String> blogIdList = tag.get_blog_id();
+			blogIdList.remove(blogId);
+			String tagName = tag.get_name_eng();
+			tagDao.updateTagBlogIdList(tagName,blogIdList);
+		}
 		return isDel;
 	}
+
+
 
 }

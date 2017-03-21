@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,21 +111,54 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public void updateTagofBlogId(String blogName, String blogTag) {
-		String postId =null;
-				//get blog'id by blogname
+		String postId = null;
+		//get blog'id by blogname
 		Post post = postDao.findPostByName(blogName);
 		postId = post.get_id();
 
-		//add id to all tags
-		if(!blogTag.contains("#")) {
-			tagDao.updateTagofBlogId(blogTag, postId);
-		}
-		else {
-			String tag[] = blogTag.split("#");
-			for (String s :tag) {
-				tagDao.updateTagofBlogId(s, postId);
+		//获取该博客ID在标签表中的所有标签
+		List<Tag> tagList = tagDao.findTagByBlogId(postId);
+		if (tagList != null && tagList.size() != 0) {
+			for (Tag tag0 : tagList) {
+				String tagName = tag0.get_name_eng();
+				if (!blogTag.contains("#")) {
+					if (!tagName.equals(blogTag)) {
+						//删除tagName标签下的这一条博客ID
+						//采用更新的方式更新标签下的博客id
+						List<String> blogId = tagDao.findTagByName(tagName).get_blog_id();
+						if (blogId != null) {
+							blogId.remove(postId);
+							tagDao.updateTagBlogIdList(tagName, blogId);
+						}
+					}
+					tagDao.updateTagofBlogId(blogTag, postId);
+				} else {
+					String tag[] = blogTag.split("#");
+					List<String> taglist = Arrays.asList(tag);
+					if (!taglist.contains(tagName)) {
+						List<String> blogId = tagDao.findTagByEngName(tagName).get_blog_id();
+						if (blogId != null) {
+							blogId.remove(postId);
+							tagDao.updateTagBlogIdList(tagName, blogId);
+						}
+					}
+					for (String s : tag) {
+						tagDao.updateTagofBlogId(s, postId);
+					}
+				}
 			}
 
+			//add id to all tags
+
+		}else {
+			if (!blogTag.contains("#")) {
+				tagDao.updateTagofBlogId(blogTag, postId);
+			}else {
+				String tag[] = blogTag.split("#");
+				for (String s : tag) {
+					tagDao.updateTagofBlogId(s, postId);
+				}
+			}
 		}
 	}
 }
