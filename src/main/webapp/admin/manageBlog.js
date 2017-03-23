@@ -28,14 +28,15 @@ var manageHost = function () {
                                                 tags += taglist[m]._name + " ";
                                             }
                                         }
+                                        var id=item[j]._id
                                         oTable.fnAddData(
-                                            [   item[j]._id,
+                                            [   id,
                                                 item[j]._title,
                                                 tags,
                                                 getLocalTime(item[j]._create_at),
                                                 getLocalTime(item[j]._update_at),
                                                 item[j]._is_exist,
-                                                '<a href="javascript:;" class="edit">编辑</a> / ' +
+                                                '<a href="editBlog.html?id='+id+'"  class="edit">编辑</a> / ' +
                                                 '<a href="javascript:;" class="delete">删除</a>']);
                                     }
                                 }
@@ -100,7 +101,7 @@ var manageHost = function () {
                     });
             }
 
-            function editBlog(){
+            /*function editBlog(){
 
                 $("#edit-blog-form").ajaxSubmit({
                     dataType: 'json',
@@ -124,7 +125,7 @@ var manageHost = function () {
                     error:function(data){
                         $("#edit-responsive").modal('hide');
                         var r ;
-                        console.log("fai"+data)
+                        console.log("fail"+data)
                         if(data.status==200){
                             alert("success");
                             r = "编辑成功！";
@@ -137,7 +138,7 @@ var manageHost = function () {
                     }
                 });
             }
-
+*/
             var flag = false; //删除标志
 
             function deleteBlog(blogId){
@@ -234,16 +235,18 @@ var manageHost = function () {
                 }
             });
 
-            $('#sample_editable_1 a.edit').live('click', function (e) {
+           /* $('#sample_editable_1 a.edit').live('click', function (e) {
                 e.preventDefault();
                 $("#edit-responsive").modal('show');
-                ///* Get the row as a parent of the link that was clicked on */
+                ///!* Get the row as a parent of the link that was clicked on *!/
                 var nRow = $(this).parents('tr')[0];
                 var aData = oTable.fnGetData(nRow);
                 $("input[name='edit-blogID']").val(aData[0]);
                 $("input[name='edit-blogName']").val(aData[1]);
                 $("input[name='edit-blogTag']").val(aData[2]);
-            });
+                $("textarea[name='edit-blog-markdown']").val(aData[3]);
+                $("textarea[name='edit-blog-html']").val(aData[4]);
+            });*/
 
             $('#add-blog-form').validate({
                 errorElement: 'span', //default input error message container

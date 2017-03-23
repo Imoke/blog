@@ -40,5 +40,13 @@ public class TagTest {
 		tag.set_blog_id(list);
 		tagDao.insert(tag);
 	}
+	@Test
+	public void testFindTagByBlogId(){
+		List<Tag> tagList = tagDao.findTagByBlogId("58cb8bcb456f33f24c9d5b5a");
+		for (Tag tag:tagList) {
+			System.out.println(tag.get_name());
+		}
+
+	}
 
 }
